@@ -3,6 +3,17 @@
     "modules": [
         "auth/login",
         "auth/register",
-        "auth/email_verification"
+        "auth/email_verification",
+        "student/st_main_navigation",
+        "student/st_home",
+        "student/st_history",
+        "student/st_profile",
+        "student/st_profile_edit_form",
+        "student/st_scanner",
+        "student/st_lcd_detail",
+        "admin/adm_main_navigation",
+        "admin/adm_dashboard",
+        "admin/adm_lcd_data",
+        "admin/adm_lcd_data_form"
     ]
 }
