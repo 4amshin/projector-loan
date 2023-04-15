@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "219880041913",
+    "project_id": "uncp-lcd",
+    "storage_bucket": "uncp-lcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219880041913:android:20b4ec9960c2e6e5fcda68",
+        "android_client_info": {
+          "package_name": "com.example.lcd_loan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219880041913-27mvfhhjcqa4vl495ubmm1phr1pgualk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lcd_loan",
+            "certificate_hash": "da642f257f72fff1a6749e08fece0b5c714f5c76"
+          }
+        },
+        {
+          "client_id": "219880041913-js9esm969scqgu3rc5p2je2mf7bltdrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDmedZsaFseYVAMweQZpH_sAIQWhWo_h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219880041913-js9esm969scqgu3rc5p2je2mf7bltdrf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "219880041913-b1vtjhonuudnb28m7jih7rik5uq2qita.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lcdLoan"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219880041913:android:c0cfaaeb5ccc1606fcda68",
+        "android_client_info": {
+          "package_name": "com.example.projector_loan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219880041913-js9esm969scqgu3rc5p2je2mf7bltdrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDmedZsaFseYVAMweQZpH_sAIQWhWo_h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219880041913-js9esm969scqgu3rc5p2je2mf7bltdrf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "219880041913-b1vtjhonuudnb28m7jih7rik5uq2qita.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lcdLoan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
