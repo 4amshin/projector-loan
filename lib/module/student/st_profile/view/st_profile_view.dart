@@ -55,7 +55,7 @@ class StProfileView extends StatefulWidget {
                       StProfileImage(
                         imgUrl: imgUrl,
                         name: name,
-                        email: email,
+                        nim: nim,
                         onEdit: () => controller.toEditProfile(
                           docId: docId,
                           imgUrl: imgUrl,

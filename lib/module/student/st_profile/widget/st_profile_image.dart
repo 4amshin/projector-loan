@@ -7,13 +7,13 @@ import 'package:projector_loan/shared/widget/cached_image/cached_image.dart';
 class StProfileImage extends StatelessWidget {
   final String? imgUrl;
   final String? name;
-  final String? email;
+  final String? nim;
   final void Function()? onEdit;
   const StProfileImage({
     Key? key,
     this.imgUrl,
     this.name,
-    this.email,
+    this.nim,
     this.onEdit,
   }) : super(key: key);
 
@@ -48,7 +48,7 @@ class StProfileImage extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           Text(
-            email ?? "emailAnda@email.com",
+            nim ?? "NIM 10 Digit",
             style: GoogleFonts.openSans(
               fontSize: 13,
               color: Colors.grey,

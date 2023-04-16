@@ -13,11 +13,6 @@ class StHomeView extends StatefulWidget {
 
     return Scaffold(
       body: SafeArea(
-        // minimum: const EdgeInsets.only(
-        //   top: 50,
-        //   left: 20,
-        //   right: 20,
-        // ),
         child: ListView(
           children: [
             StreamBuilder(

@@ -23,7 +23,17 @@ class StTopProfile extends StatelessWidget {
         bottom: 30,
       ),
       decoration: BoxDecoration(
-        color: Colors.indigoAccent[100],
+        gradient: LinearGradient(
+          colors: [
+            Colors.indigoAccent,
+            Colors.indigoAccent[100]!,
+            // Color(0xffFF8787),
+            // Color(0xfffbc3ad),
+          ],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+        // color: Colors.indigoAccent[100],
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(50),
           bottomRight: Radius.circular(50),
@@ -41,10 +51,14 @@ class StTopProfile extends StatelessWidget {
                 colorFilter:
                     const ColorFilter.mode(Colors.white, BlendMode.srcIn),
               ),
-              WdCachedImage(
-                imgUrl: imgUrl,
-                size: 40,
-                borderRadius: 20,
+              CircleAvatar(
+                backgroundColor: Colors.white.withOpacity(0.5),
+                radius: 20.5,
+                child: WdCachedImage(
+                  imgUrl: imgUrl,
+                  size: 40,
+                  borderRadius: 20,
+                ),
               ),
             ],
           ),
@@ -78,7 +92,7 @@ class StTopProfile extends StatelessWidget {
                   height: 1,
                   fontSize: 13,
                   color: Colors.white70,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],

@@ -44,23 +44,25 @@ class LoginController extends State<LoginView> implements MvcController {
         email: email!,
         password: password!,
       );
-      if (!currentUser!.emailVerified) {
+      if (currentUser?.emailVerified == false) {
         showSnackbarMessage("Email belum diverifikasi");
       }
-      Get.offAll(const StMainNavigationView());
 
-      // else if (currentUser == null) {
-      //   showSnackbarMessage("User Null");
-      // }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        showSnackbarMessage('Pengguna tidak ditemukan');
-      } else if (e.code == 'invalid-email') {
-        showSnackbarMessage('Email tidak terdaftar');
-      } else if (e.code == 'wrong-password') {
-        showSnackbarMessage("Password anda salah");
-      }
+      log("Navigate to Student Dashboard");
+      Get.offAll(const StMainNavigationView());
+    } catch (e) {
+      log("Error during login: $e");
+      showSnackbarMessage("Terjadi kesalahan saat login");
     }
+    // on FirebaseAuthException catch (e) {
+    //   if (e.code == 'user-not-found') {
+    //     showSnackbarMessage('Pengguna tidak ditemukan');
+    //   } else if (e.code == 'invalid-email') {
+    //     showSnackbarMessage('Email tidak terdaftar');
+    //   } else if (e.code == 'wrong-password') {
+    //     showSnackbarMessage("Password anda salah");
+    //   }
+    // }
   }
 
   toRegisterView() {
