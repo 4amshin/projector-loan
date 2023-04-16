@@ -1,8 +1,14 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:projector_loan/shared/widget/dialog/dialogButton.dart';
 import 'package:projector_loan/state_util.dart';
 
-Future showInfoDialog(String message) async {
+Future showInfoDialog({
+  final String? label,
+  required String message,
+}) async {
   await showDialog<void>(
     context: globalContext,
     barrierDismissible: true,
@@ -22,36 +28,31 @@ Future showInfoDialog(String message) async {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Info",
-                          style: TextStyle(
+                        SvgPicture.asset(
+                          'assets/icons/okLogo.svg',
+                          height: 80,
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          label ?? "Info",
+                          style: GoogleFonts.openSans(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
                         Text(
                           message,
-                          style: const TextStyle(
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.openSans(
                             fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueGrey,
-                          ),
-                          onPressed: () => Get.back(),
-                          child: const Text(
-                            "Ok",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
+                        const SizedBox(height: 15),
+                        dialogButton(
+                          label: 'Ok',
+                          onTap: () => Get.back(),
+                          backgroundColor: const Color(0xff5cd89b),
                         ),
                       ],
                     ),

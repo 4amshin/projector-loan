@@ -31,7 +31,8 @@ class ForgotPasswordController extends State<ForgotPasswordView>
         log("Sending Reset Password Link");
         await FirebaseAuth.instance
             .sendPasswordResetEmail(email: email!.trim());
-        showInfoDialog("Link reset password telah terkirim ke email anda!");
+        showInfoDialog(
+            message: "Link reset password telah terkirim ke email anda!");
       }
       log("Back to Login Page");
       Get.offAll(const LoginView());

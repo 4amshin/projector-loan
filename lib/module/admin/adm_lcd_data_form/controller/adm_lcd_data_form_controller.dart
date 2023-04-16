@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:projector_loan/core.dart';
 import 'package:projector_loan/services/lcd_services/lcd_service.dart';
+import 'package:projector_loan/shared/widget/dialog/confirmation_dialog.dart';
 import 'package:projector_loan/state_util.dart';
 import '../view/adm_lcd_data_form_view.dart';
 
@@ -52,16 +54,21 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
 
   doSaveData() async {
     if (isEditMode) {
-      await LcdService.updateData(
-        docId: docId!,
-        lcdId: lcdId!,
-        lcdName: lcdName!,
-        lcdBrand: lcdBrand!,
-        resolution: resolution!,
-        weight: weight!,
-        port: port!,
-        status: status!,
-      );
+      await confirmationDialog(
+          message: 'Simpan Perubahan?',
+          onYes: () async {
+            await LcdService.updateData(
+              docId: docId!,
+              lcdId: lcdId!,
+              lcdName: lcdName!,
+              lcdBrand: lcdBrand!,
+              resolution: resolution!,
+              weight: weight!,
+              port: port!,
+              status: status!,
+            );
+            Get.back();
+          });
       log("Edit Data");
     } else {
       //else await add new data
@@ -73,6 +80,7 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
         weight: weight!,
         port: port!,
       );
+      await showInfoDialog(message: 'Data Proyektor Ditambahkan');
       log("New Data Added");
     }
     //Assigned lcdid to be a qr image
@@ -82,8 +90,14 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
   }
 
   deleteData() async {
-    await LcdService.deleteData(docId: docId!);
-    log("Data Deleted....\nNavigate Back");
+    await confirmationDialog(
+      message: 'Hapus Data',
+      onYes: () async {
+        await LcdService.deleteData(docId: docId!);
+        log("Data Deleted....\nNavigate Back");
+        Get.back();
+      },
+    );
     Get.back();
   }
 }

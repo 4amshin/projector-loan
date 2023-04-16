@@ -41,7 +41,10 @@ class StProfileEditFormController extends State<StProfileEditFormView>
       nim: nim!,
     );
     log("Saving Edited Profile Data\nImgUrl: $imgUrl, \nName: $name, \nNIM: $nim");
-    await showInfoDialog("Data Tersimpan");
+    await showInfoDialog(
+      label: 'Tersimpan',
+      message: 'Data anda tersimpan',
+    );
     Get.back();
   }
 }

@@ -1,31 +1,8 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projector_loan/shared/widget/dialog/dialogButton.dart';
 import 'package:projector_loan/state_util.dart';
-
-dialogButton({
-  required String label,
-  final Color? labelColor,
-  final Color? backgroundColor,
-  final void Function()? onTap,
-}) {
-  return Expanded(
-    child: ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        backgroundColor: backgroundColor ?? Colors.blueGrey,
-      ),
-      onPressed: onTap,
-      child: Text(
-        label,
-        style: GoogleFonts.openSans(
-          color: labelColor ?? Colors.white,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    ),
-  );
-}
 
 Future confirmationDialog({
   required String message,
@@ -71,17 +48,22 @@ Future confirmationDialog({
                         ),
                         Row(
                           children: [
-                            dialogButton(
-                              label: 'Tidak',
-                              labelColor: Colors.black,
-                              backgroundColor: Colors.white,
-                              onTap: () => Get.back(),
+                            Expanded(
+                              child: dialogButton(
+                                label: 'Tidak',
+                                labelColor: Colors.black,
+                                backgroundColor: Colors.white,
+                                onTap: () => Get.back(),
+                              ),
                             ),
                             const SizedBox(width: 15),
-                            dialogButton(
-                              label: 'Ya',
-                              backgroundColor: buttonColor ?? Colors.redAccent,
-                              onTap: onYes,
+                            Expanded(
+                              child: dialogButton(
+                                label: 'Ya',
+                                backgroundColor:
+                                    buttonColor ?? Colors.redAccent,
+                                onTap: onYes,
+                              ),
                             ),
                           ],
                         ),
