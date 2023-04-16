@@ -38,7 +38,17 @@ class AtLoginContent extends StatelessWidget {
             controller.password = value;
           },
         ),
-        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            AtAccountConfirmation(
+              content: '',
+              link: "Lupa Password?",
+              onTap: () => controller.forgetPasswordView(),
+            ),
+          ],
+        ),
+        const SizedBox(height: 15),
         AtRegistrationButton(
           title: 'LOGIN',
           onTap: () => controller.doLogin(),

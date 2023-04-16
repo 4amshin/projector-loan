@@ -13,11 +13,11 @@ class StHomeView extends StatefulWidget {
 
     return Scaffold(
       body: SafeArea(
-        minimum: const EdgeInsets.only(
-          top: 50,
-          left: 20,
-          right: 20,
-        ),
+        // minimum: const EdgeInsets.only(
+        //   top: 50,
+        //   left: 20,
+        //   right: 20,
+        // ),
         child: ListView(
           children: [
             StreamBuilder(
@@ -40,10 +40,6 @@ class StHomeView extends StatefulWidget {
                   imgUrl: imgUrl,
                   name: name,
                 );
-                // return StTopProfile(
-                //   // imgUrl: "https://bit.ly/43wLLI7",
-                //   name: name,
-                // );
               },
             ),
           ],

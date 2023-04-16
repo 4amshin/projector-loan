@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projector_loan/core.dart';
 import 'package:projector_loan/module/auth/login/view/login_view.dart';
 import 'package:projector_loan/module/auth/register/view/register_view.dart';
 import 'package:projector_loan/module/student/st_main_navigation/view/st_main_navigation_view.dart';
@@ -64,6 +65,11 @@ class LoginController extends State<LoginView> implements MvcController {
 
   toRegisterView() {
     Get.offAll(const RegisterView());
+  }
+
+  forgetPasswordView() {
+    log("Navigate to Forget Password Page");
+    Get.to(const ForgotPasswordView());
   }
 
   void showSnackbarMessage(String message) {

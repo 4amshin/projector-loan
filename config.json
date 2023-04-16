@@ -4,6 +4,7 @@
         "auth/login",
         "auth/register",
         "auth/email_verification",
+        "auth/forgot_password",
         "student/st_main_navigation",
         "student/st_home",
         "student/st_history",

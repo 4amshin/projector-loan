@@ -24,6 +24,7 @@ class AtTitle extends StatelessWidget {
         ),
         Text(
           content ?? "Daftarkan diri anda",
+          textAlign: TextAlign.center,
           style: GoogleFonts.openSans(
             fontSize: 13,
             color: Colors.grey,
