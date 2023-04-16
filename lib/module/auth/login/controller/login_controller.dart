@@ -50,19 +50,18 @@ class LoginController extends State<LoginView> implements MvcController {
       } else {
         showSnackbarMessage("Email belum diverifikasi");
       }
-    } catch (e) {
-      log("Error during login: $e");
-      showSnackbarMessage("Terjadi kesalahan saat login");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        showSnackbarMessage('Pengguna tidak ditemukan');
+      } else if (e.code == 'invalid-email') {
+        showSnackbarMessage('Email tidak terdaftar');
+      } else if (e.code == 'wrong-password') {
+        showSnackbarMessage("Password anda salah");
+      } else {
+        log("Error during login: $e");
+        showSnackbarMessage("Terjadi kesalahan saat login");
+      }
     }
-    // on FirebaseAuthException catch (e) {
-    //   if (e.code == 'user-not-found') {
-    //     showSnackbarMessage('Pengguna tidak ditemukan');
-    //   } else if (e.code == 'invalid-email') {
-    //     showSnackbarMessage('Email tidak terdaftar');
-    //   } else if (e.code == 'wrong-password') {
-    //     showSnackbarMessage("Password anda salah");
-    //   }
-    // }
   }
 
   toRegisterView() {

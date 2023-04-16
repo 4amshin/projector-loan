@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/student/st_profile_edit_form/view/st_profile_edit_form_view.dart';
-import 'package:projector_loan/state_util.dart';
-import '../view/st_profile_view.dart';
+import 'package:projector_loan/shared/widget/dialog/confirmation_dialog.dart';
 
 class StProfileController extends State<StProfileView>
     implements MvcController {
@@ -26,14 +24,19 @@ class StProfileController extends State<StProfileView>
 
   final currentUser = FirebaseAuth.instance.currentUser!;
 
-  doLogOut() async {
-    try {
-      log("Logging Out");
-      await FirebaseAuth.instance.signOut();
-      Get.offAll(const LoginView());
-    } on Exception catch (e) {
-      log(e.toString());
-    }
+  doLogOut() {
+    confirmationDialog(
+      message: 'Kamu yakin ingin Logout?',
+      onYes: () async {
+        try {
+          log("Logging Out");
+          await FirebaseAuth.instance.signOut();
+          Get.offAll(const LoginView());
+        } on Exception catch (e) {
+          log(e.toString());
+        }
+      },
+    );
   }
 
   toEditProfile({
