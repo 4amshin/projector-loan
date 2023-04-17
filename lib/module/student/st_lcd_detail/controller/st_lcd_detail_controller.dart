@@ -75,6 +75,7 @@ class StLcdDetailController extends State<StLcdDetailView>
       await LoanService.addLoanData(
         lcdId: lcdId,
         lcdName: lcdName,
+        studentEmail: currentUser.email!,
         studentName: studentName,
         studentNim: studentNim,
         studentProfile: studentProfile,

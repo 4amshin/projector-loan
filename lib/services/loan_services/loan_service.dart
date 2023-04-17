@@ -5,6 +5,7 @@ class LoanService {
     required String lcdId,
     required String lcdName,
     required String studentName,
+    required String studentEmail,
     required String studentNim,
     required String studentProfile,
   }) async {
@@ -12,9 +13,11 @@ class LoanService {
       "lcd_id": lcdId,
       "lcd_name": lcdName,
       "status": 'Request',
+      "loan_date": Timestamp.now(),
+      "student_email": studentEmail,
       "student_name": studentName,
-      "studentNim": studentNim,
-      "studentProfile": studentProfile,
+      "student_nim": studentNim,
+      "student_profile": studentProfile,
     });
   }
 

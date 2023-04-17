@@ -15,6 +15,7 @@
         "admin/adm_main_navigation",
         "admin/adm_dashboard",
         "admin/adm_lcd_data",
-        "admin/adm_lcd_data_form"
+        "admin/adm_lcd_data_form",
+        "admin/adm_lcd_loans"
     ]
 }

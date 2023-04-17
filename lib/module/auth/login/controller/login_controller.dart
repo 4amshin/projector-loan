@@ -4,10 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/auth/login/view/login_view.dart';
-import 'package:projector_loan/module/auth/register/view/register_view.dart';
-import 'package:projector_loan/module/student/st_main_navigation/view/st_main_navigation_view.dart';
-import 'package:projector_loan/state_util.dart';
 
 class LoginController extends State<LoginView> implements MvcController {
   static late LoginController instance;
@@ -49,6 +45,8 @@ class LoginController extends State<LoginView> implements MvcController {
         Get.offAll(const StMainNavigationView());
       } else {
         showSnackbarMessage("Email belum diverifikasi");
+        await currentUser?.sendEmailVerification();
+        showSnackbarMessage("Mengirim Link Verifikasi");
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

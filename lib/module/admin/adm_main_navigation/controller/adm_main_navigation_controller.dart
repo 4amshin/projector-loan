@@ -2,6 +2,7 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/module/admin/adm_dashboard/view/adm_dashboard_view.dart';
 import 'package:projector_loan/module/admin/adm_lcd_data/view/adm_lcd_data_view.dart';
+import 'package:projector_loan/module/admin/adm_lcd_loans/view/adm_lcd_loans_view.dart';
 import 'package:projector_loan/shared/widget/tab_bar_item/tab_bar_item.dart';
 import 'package:projector_loan/state_util.dart';
 import '../view/adm_main_navigation_view.dart';
@@ -34,6 +35,7 @@ class AdmMainNavigationController extends State<AdmMainNavigationView>
 
   List<Widget> widgetOptions = const [
     AdmDashboardView(),
+    AdmLcdLoansView(),
     AdmLcdDataView(),
   ];
 
@@ -42,6 +44,10 @@ class AdmMainNavigationController extends State<AdmMainNavigationView>
       tabBarItem(
         iconUrl: 'dashboard.svg',
         title: 'Dashboard',
+      ),
+      tabBarItem(
+        iconUrl: 'history.svg',
+        title: 'Peminjaman',
       ),
       tabBarItem(
         iconUrl: 'projector.svg',
