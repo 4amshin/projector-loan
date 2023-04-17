@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 import 'package:projector_loan/state_util.dart';
@@ -50,6 +51,29 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
         );
         Get.back();
         log("Request Rejected.....\nDeleting Request");
+      },
+    );
+  }
+
+  confirmReturned({
+    required String docId,
+    required String status,
+  }) async {
+    await confirmationDialog(
+      message: "LCD Dikembalikan?",
+      onYes: () async {
+        await LoanService.updateLoanStatus(
+          docId: docId,
+          status: status,
+        );
+        await FirebaseFirestore.instance
+            .collection("loan_data")
+            .doc(docId)
+            .update({
+          "return_date": Timestamp.now(),
+        });
+        Get.back();
+        log("LCD Returned");
       },
     );
   }

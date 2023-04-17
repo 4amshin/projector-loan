@@ -3,19 +3,24 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:projector_loan/module/admin/adm_lcd_loans/controller/adm_lcd_loans_controller.dart';
 import 'package:projector_loan/module/admin/adm_lcd_loans/widget/loan_status_card.dart';
 import 'package:projector_loan/shared/widget/no_data/no_data_img.dart';
 
 class AdmLoanStatus extends StatelessWidget {
   final String status;
-  final bool displayButton;
+  final bool displayRequestButton;
+  final bool displayReturnedButton;
   final bool acceptRequest;
+  final bool isReturned;
   const AdmLoanStatus({
     Key? key,
-    this.displayButton = false,
-    this.acceptRequest = false,
     required this.status,
+    this.displayRequestButton = false,
+    this.displayReturnedButton = false,
+    this.acceptRequest = false,
+    this.isReturned = false,
   }) : super(key: key);
 
   @override
@@ -60,9 +65,9 @@ class AdmLoanStatus extends StatelessWidget {
                 nim: studentNim,
                 imgUrl: studentImg,
                 lcdName: lcdName,
-                displayButton: displayButton,
+                requestButton: displayRequestButton,
                 onAccept: () {
-                  if (displayButton && acceptRequest) {
+                  if (displayRequestButton && acceptRequest) {
                     controller.acceptRequest(
                       docId: docId,
                       status: 'OnUse',
@@ -70,8 +75,20 @@ class AdmLoanStatus extends StatelessWidget {
                   }
                 },
                 onReject: () {
-                  controller.rejectRequest(docId: docId);
+                  if (displayRequestButton) {
+                    controller.rejectRequest(docId: docId);
+                  }
                 },
+                returnedButton: displayReturnedButton,
+                onReturn: () {
+                  if (displayReturnedButton) {
+                    controller.confirmReturned(
+                      docId: docId,
+                      status: 'Returned',
+                    );
+                  }
+                },
+                isReturned: isReturned,
               );
             },
           );

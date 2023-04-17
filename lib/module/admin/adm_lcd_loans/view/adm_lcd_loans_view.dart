@@ -50,11 +50,17 @@ class AdmLcdLoansView extends StatefulWidget {
           children: [
             AdmLoanStatus(
               status: 'Request',
-              displayButton: true,
+              displayRequestButton: true,
               acceptRequest: true,
             ),
-            AdmLoanStatus(status: 'OnUse'),
-            AdmLoanStatus(status: 'Returned'),
+            AdmLoanStatus(
+              status: 'OnUse',
+              displayReturnedButton: true,
+            ),
+            AdmLoanStatus(
+              status: 'Returned',
+              isReturned: true,
+            ),
           ],
         ),
       ),
