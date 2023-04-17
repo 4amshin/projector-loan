@@ -28,10 +28,7 @@ class StLcdDetailView extends StatefulWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('data_lcd')
-            .where('lcd_id', isEqualTo: scannedData)
-            .snapshots(),
+        stream: controller.getLcdData().asStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -56,7 +53,7 @@ class StLcdDetailView extends StatefulWidget {
         },
       ),
       floatingActionButton: StBorrowButton(
-        onTap: () {},
+        onTap: () => controller.doLoanLcd(),
       ),
     );
   }

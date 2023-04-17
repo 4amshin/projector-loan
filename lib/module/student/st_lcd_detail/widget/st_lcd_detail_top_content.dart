@@ -16,12 +16,8 @@ class LcdDetailTopContent extends StatelessWidget {
       child: Column(
         children: [
           SvgPicture.asset(
-            'assets/icons/projector.svg',
+            'assets/icons/lcd.svg',
             height: 130,
-            colorFilter: const ColorFilter.mode(
-              Colors.amber,
-              BlendMode.srcIn,
-            ),
           ),
           const SizedBox(height: 5),
           Text(
