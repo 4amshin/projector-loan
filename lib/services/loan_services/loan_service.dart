@@ -29,4 +29,13 @@ class LoanService {
       "status": status,
     });
   }
+
+  static deleteLoanData({
+    required String docId,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection("loan_data")
+        .doc(docId)
+        .delete();
+  }
 }

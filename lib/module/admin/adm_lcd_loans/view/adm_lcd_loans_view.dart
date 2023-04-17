@@ -21,7 +21,7 @@ class AdmLcdLoansView extends StatefulWidget {
             color: Colors.white,
           ),
           bottom: TabBar(
-            // isScrollable: true,
+            isScrollable: true,
             indicatorColor: Colors.indigo,
             labelColor: Colors.white,
             labelStyle: GoogleFonts.openSans(
@@ -35,20 +35,24 @@ class AdmLcdLoansView extends StatefulWidget {
             unselectedLabelColor: Colors.white54,
             tabs: const [
               Tab(
-                text: "Pending",
+                text: "Request",
               ),
               Tab(
-                text: "Packing",
+                text: "Sedang Digunakan",
               ),
               Tab(
-                text: "On The Way",
+                text: "Di Kembalikan",
               ),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            AdmLoanStatus(status: 'Request'),
+            AdmLoanStatus(
+              status: 'Request',
+              displayButton: true,
+              acceptRequest: true,
+            ),
             AdmLoanStatus(status: 'OnUse'),
             AdmLoanStatus(status: 'Returned'),
           ],

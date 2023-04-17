@@ -10,12 +10,18 @@ class LoanStatusCard extends StatelessWidget {
   final String nim;
   final String lcdName;
   final String imgUrl;
+  final bool displayButton;
+  final void Function()? onAccept;
+  final void Function()? onReject;
   const LoanStatusCard({
     Key? key,
     required this.name,
     required this.nim,
     required this.lcdName,
     required this.imgUrl,
+    this.displayButton = false,
+    this.onAccept,
+    this.onReject,
   }) : super(key: key);
 
   @override
@@ -23,10 +29,10 @@ class LoanStatusCard extends StatelessWidget {
     return Container(
       height: 87,
       padding: const EdgeInsets.symmetric(
-        horizontal: 20,
+        horizontal: 10,
         vertical: 10,
       ),
-      margin: const EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 18),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -34,7 +40,7 @@ class LoanStatusCard extends StatelessWidget {
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
             offset: const Offset(2, 3),
-            blurRadius: 3,
+            blurRadius: 4,
           ),
         ],
       ),
@@ -45,9 +51,7 @@ class LoanStatusCard extends StatelessWidget {
             imgUrl: imgUrl,
             borderRadius: 15,
           ),
-          const SizedBox(
-            width: 10.0,
-          ),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +84,7 @@ class LoanStatusCard extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  "Request: $lcdName",
+                  lcdName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.openSans(
@@ -92,23 +96,24 @@ class LoanStatusCard extends StatelessWidget {
               ],
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CardButton(
-                onTap: () {},
-                label: 'Terima',
-                labelColor: Colors.black,
-                backgroundColor: Colors.greenAccent,
-              ),
-              CardButton(
-                onTap: () {},
-                label: 'Tolak',
-                labelColor: Colors.black,
-                backgroundColor: Colors.redAccent,
-              ),
-            ],
-          ),
+          if (displayButton)
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CardButton(
+                  onTap: onAccept,
+                  label: 'Terima',
+                  labelColor: Colors.black,
+                  backgroundColor: Colors.greenAccent.withOpacity(0.8),
+                ),
+                CardButton(
+                  onTap: onReject,
+                  label: 'Tolak',
+                  labelColor: Colors.black,
+                  backgroundColor: Colors.redAccent.withOpacity(0.8),
+                ),
+              ],
+            ),
         ],
       ),
     );
