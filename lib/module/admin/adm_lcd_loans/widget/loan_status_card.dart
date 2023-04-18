@@ -16,6 +16,7 @@ class LoanStatusCard extends StatelessWidget {
   final void Function()? onReject;
   final bool returnedButton;
   final void Function()? onReturn;
+  final bool isRequest;
   final bool isReturned;
   const LoanStatusCard({
     Key? key,
@@ -28,6 +29,7 @@ class LoanStatusCard extends StatelessWidget {
     this.onReject,
     this.returnedButton = false,
     this.onReturn,
+    this.isRequest = false,
     this.isReturned = false,
   }) : super(key: key);
 
@@ -104,21 +106,22 @@ class LoanStatusCard extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        if (returnedButton || isReturned)
-                          Text(
-                            isReturned
-                                ? ' | Telah Dikembalikan'
-                                : ' | Sedang Digunakan',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.openSans(
-                              fontSize: 12,
-                              color: isReturned
-                                  ? Colors.green.withOpacity(0.8)
-                                  : Colors.indigoAccent.withOpacity(0.8),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                        returnedButton == false && isReturned
+                            ? Text(
+                                isReturned
+                                    ? ' | Telah Dikembalikan'
+                                    : ' | Sedang Digunakan',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.openSans(
+                                  fontSize: 12,
+                                  color: isReturned
+                                      ? Colors.green.withOpacity(0.8)
+                                      : Colors.indigoAccent.withOpacity(0.8),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )
+                            : const SizedBox(),
                         if (isReturned)
                           Padding(
                             padding: const EdgeInsets.only(left: 5),

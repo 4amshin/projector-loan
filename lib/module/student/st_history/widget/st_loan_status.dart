@@ -11,10 +11,13 @@ import 'package:projector_loan/shared/widget/no_data/no_data_img.dart';
 
 class StLoanStatus extends StatelessWidget {
   final String status;
-
+  final bool cancelRequest;
+  final bool returnedRequest;
   const StLoanStatus({
     Key? key,
     required this.status,
+    this.cancelRequest = false,
+    this.returnedRequest = false,
   }) : super(key: key);
 
   @override
@@ -53,7 +56,9 @@ class StLoanStatus extends StatelessWidget {
               String studentNim = item["student_nim"];
               String studentImg = item["student_profile"];
               String lcdName = item["lcd_name"];
-              DateTime dateTime = item["loan_date"].toDate();
+              DateTime loanDate = item["loan_date"].toDate();
+              DateTime returnDate =
+                  item["return_date"]?.toDate() ?? DateTime.now();
 
               //initialize day and hour time
               //day format
@@ -61,13 +66,27 @@ class StLoanStatus extends StatelessWidget {
               //hour format
               DateFormat timeFormat = DateFormat('hh:mm a');
               // format the date and time strings
-              String dayTime = dateFormat.format(dateTime);
-              String hourTime = timeFormat.format(dateTime);
+              String dayTime = dateFormat.format(loanDate);
+              String loanHour = timeFormat.format(loanDate);
+              String hourReturned = timeFormat.format(returnDate);
 
               return StLoanStatusCard(
                 lcdName: lcdName,
                 dayTime: dayTime,
-                hourTime: hourTime,
+                loanHour: loanHour,
+                returnHour: hourReturned,
+                cancelRequest: cancelRequest,
+                returnedRequest: returnedRequest,
+                isReturned: status == 'Returned' ? true : false,
+                onTap: () {
+                  if (cancelRequest) {
+                    controller.doCancelRequest(docId: docId);
+                  } else if (returnedRequest) {
+                    controller.doReturnedRequest(docId: docId);
+                  } else {
+                    null;
+                  }
+                },
               );
             },
           );

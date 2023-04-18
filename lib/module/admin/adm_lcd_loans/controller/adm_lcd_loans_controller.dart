@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/state_util.dart';
-import '../view/adm_lcd_loans_view.dart';
 
 class AdmLcdLoansController extends State<AdmLcdLoansView>
     implements MvcController {
@@ -65,6 +63,7 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
         await LoanService.updateLoanStatus(
           docId: docId,
           status: status,
+          onReturn: false,
         );
         await FirebaseFirestore.instance
             .collection("loan_data")

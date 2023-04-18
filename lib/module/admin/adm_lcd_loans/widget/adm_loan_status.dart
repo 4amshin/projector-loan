@@ -11,16 +11,12 @@ import 'package:projector_loan/shared/widget/no_data/no_data_img.dart';
 class AdmLoanStatus extends StatelessWidget {
   final String status;
   final bool displayRequestButton;
-  final bool displayReturnedButton;
   final bool acceptRequest;
-  final bool isReturned;
   const AdmLoanStatus({
     Key? key,
     required this.status,
     this.displayRequestButton = false,
-    this.displayReturnedButton = false,
     this.acceptRequest = false,
-    this.isReturned = false,
   }) : super(key: key);
 
   @override
@@ -60,12 +56,17 @@ class AdmLoanStatus extends StatelessWidget {
               String lcdName = item["lcd_name"];
               DateTime loanAt = item["loan_date"].toDate();
 
+              bool requestRefund = item["on_return"];
+
               return LoanStatusCard(
                 name: studentName,
                 nim: studentNim,
                 imgUrl: studentImg,
                 lcdName: lcdName,
                 requestButton: displayRequestButton,
+                returnedButton: requestRefund,
+                isRequest: status == 'Request' ? true : false,
+                isReturned: status == 'Returned' ? true : false,
                 onAccept: () {
                   if (displayRequestButton && acceptRequest) {
                     controller.acceptRequest(
@@ -79,16 +80,14 @@ class AdmLoanStatus extends StatelessWidget {
                     controller.rejectRequest(docId: docId);
                   }
                 },
-                returnedButton: displayReturnedButton,
                 onReturn: () {
-                  if (displayReturnedButton) {
+                  if (requestRefund) {
                     controller.confirmReturned(
                       docId: docId,
                       status: 'Returned',
                     );
                   }
                 },
-                isReturned: isReturned,
               );
             },
           );

@@ -38,6 +38,7 @@ Future confirmationDialog({
                         const SizedBox(height: 20),
                         Text(
                           message,
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.openSans(
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,

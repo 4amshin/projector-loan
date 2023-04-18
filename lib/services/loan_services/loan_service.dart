@@ -14,6 +14,7 @@ class LoanService {
       "lcd_name": lcdName,
       "status": 'Request',
       "loan_date": Timestamp.now(),
+      "on_return": false,
       "student_email": studentEmail,
       "student_name": studentName,
       "student_nim": studentNim,
@@ -24,9 +25,20 @@ class LoanService {
   static updateLoanStatus({
     required String docId,
     required String status,
+    final bool? onReturn,
   }) async {
     await FirebaseFirestore.instance.collection("loan_data").doc(docId).update({
       "status": status,
+      "on_return": onReturn ?? false,
+    });
+  }
+
+  static returnRequest({
+    required String docId,
+    required bool onReturn,
+  }) async {
+    await FirebaseFirestore.instance.collection("loan_data").doc(docId).update({
+      "on_return": onReturn,
     });
   }
 

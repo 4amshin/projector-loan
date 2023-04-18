@@ -47,8 +47,14 @@ class StHistoryView extends StatefulWidget {
         ),
         body: const TabBarView(
           children: [
-            StLoanStatus(status: 'Request'),
-            StLoanStatus(status: 'OnUse'),
+            StLoanStatus(
+              status: 'Request',
+              cancelRequest: true,
+            ),
+            StLoanStatus(
+              status: 'OnUse',
+              returnedRequest: true,
+            ),
             StLoanStatus(status: 'Returned'),
           ],
         ),
