@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
-import '../controller/st_history_controller.dart';
+import 'package:projector_loan/module/student/st_history/widget/st_loan_status.dart';
 
 class StHistoryView extends StatefulWidget {
   const StHistoryView({Key? key}) : super(key: key);
@@ -8,18 +9,48 @@ class StHistoryView extends StatefulWidget {
   Widget build(context, StHistoryController controller) {
     controller.view = this;
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        title: const Text("StHistory"),
-        actions: const [],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: const [],
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.indigoAccent,
+          centerTitle: true,
+          title: const AppBarTitle(
+            title: 'Peminjaman LCD',
+            color: Colors.white,
           ),
+          bottom: TabBar(
+            isScrollable: true,
+            indicatorColor: Colors.indigo,
+            labelColor: Colors.white,
+            labelStyle: GoogleFonts.openSans(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            unselectedLabelStyle: GoogleFonts.openSans(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+            unselectedLabelColor: Colors.white54,
+            tabs: const [
+              Tab(
+                text: "Request",
+              ),
+              Tab(
+                text: "Sedang Digunakan",
+              ),
+              Tab(
+                text: "Riwayat",
+              ),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            StLoanStatus(status: 'Request'),
+            StLoanStatus(status: 'OnUse'),
+            StLoanStatus(status: 'Returned'),
+          ],
         ),
       ),
     );

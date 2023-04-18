@@ -43,7 +43,8 @@ class LoginController extends State<LoginView> implements MvcController {
       if (currentUser?.emailVerified == true) {
         log("Navigate to Student Dashboard");
         Get.offAll(const StMainNavigationView());
-      } else {
+      }
+      if (currentUser?.emailVerified == false) {
         showSnackbarMessage("Email belum diverifikasi");
         await currentUser?.sendEmailVerification();
         showSnackbarMessage("Mengirim Link Verifikasi");

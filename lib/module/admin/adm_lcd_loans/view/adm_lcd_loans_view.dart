@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
 import 'package:projector_loan/module/admin/adm_lcd_loans/widget/adm_loan_status.dart';
-import '../controller/adm_lcd_loans_controller.dart';
 
 class AdmLcdLoansView extends StatefulWidget {
   const AdmLcdLoansView({Key? key}) : super(key: key);
