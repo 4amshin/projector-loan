@@ -39,17 +39,6 @@ class StProfileViewLoading extends StatelessWidget {
       ),
     );
 
-    final bioBox = _buildShimmer(
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(16),
-        ),
-      ),
-    );
-
     return Expanded(
       child: ListView(
         children: [
@@ -59,8 +48,6 @@ class StProfileViewLoading extends StatelessWidget {
           nameBox,
           const SizedBox(height: 10),
           titleBox,
-          const SizedBox(height: 25),
-          bioBox,
         ],
       ),
     );

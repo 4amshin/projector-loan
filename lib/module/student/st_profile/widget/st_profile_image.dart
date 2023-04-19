@@ -19,43 +19,46 @@ class StProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              WdCachedImage(
-                imgUrl: imgUrl,
-                size: 130,
-                borderRadius: 45,
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: StEditButton(
-                  onTap: onEdit,
+    return Padding(
+      padding: const EdgeInsets.only(top: 35, bottom: 25),
+      child: Center(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                WdCachedImage(
+                  imgUrl: imgUrl,
+                  size: 130,
+                  borderRadius: 45,
                 ),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: StEditButton(
+                    onTap: onEdit,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Text(
+              name ?? "Nama Lengkap",
+              style: GoogleFonts.openSans(
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Text(
-            name ?? "Nama Lengkap",
-            style: GoogleFonts.openSans(
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold,
             ),
-          ),
-          const SizedBox(height: 3),
-          Text(
-            nim ?? "NIM 10 Digit",
-            style: GoogleFonts.openSans(
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.w400,
+            const SizedBox(height: 3),
+            Text(
+              nim ?? "NIM 10 Digit",
+              style: GoogleFonts.openSans(
+                fontSize: 13,
+                color: Colors.grey,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

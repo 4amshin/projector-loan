@@ -21,7 +21,7 @@ class StProfileDetail extends StatelessWidget {
           StProfileDetailItem(
             iconUrl: 'user.svg',
             title: 'Detail Login',
-            subTitle: 'User Name, Password',
+            subTitle: 'Email Mahasiswa, Password',
             onTap: () {},
           ),
           Divider(
