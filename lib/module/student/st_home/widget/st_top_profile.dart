@@ -1,104 +1,105 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projector_loan/shared/widget/cached_image/cached_image.dart';
+import 'package:projector_loan/core.dart';
 
 class StTopProfile extends StatelessWidget {
-  final String? imgUrl;
-  final String? name;
   const StTopProfile({
     Key? key,
-    this.imgUrl,
-    this.name,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        left: 25,
-        right: 25,
-        top: 20,
-        bottom: 30,
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.indigoAccent,
-            Colors.indigoAccent[100]!,
-            // Color(0xffFF8787),
-            // Color(0xfffbc3ad),
-          ],
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-        ),
-        // color: Colors.indigoAccent[100],
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(50),
-          bottomRight: Radius.circular(50),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    StHomeController controller = StHomeController.instance;
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('students')
+          .where("email", isEqualTo: controller.currentUser.email)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const StTopProfileLoading();
+        }
+
+        final doc = snapshot.data!.docs.first;
+        // final email = doc.get('email') as String;
+        final name = doc.get('name') as String;
+        final imgUrl = doc.get('foto') as String;
+        // final nim = doc.get('nim') as String;
+        // final role = doc.get('role') as String;
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          child: Column(
             children: [
-              SvgPicture.asset(
-                "assets/icons/uncp.svg",
-                height: 35,
-                colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/dashboard.svg",
+                    height: 28,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.black54,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.grey.withOpacity(0.5),
+                    radius: 18,
+                    child: WdCachedImage(
+                      imgUrl: imgUrl,
+                      size: 40,
+                      borderRadius: 20,
+                    ),
+                  ),
+                ],
               ),
-              CircleAvatar(
-                backgroundColor: Colors.white.withOpacity(0.5),
-                radius: 20.5,
-                child: WdCachedImage(
-                  imgUrl: imgUrl,
-                  size: 40,
-                  borderRadius: 20,
-                ),
+              const SizedBox(
+                height: 25.0,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hi, ",
+                        style: GoogleFonts.openSans(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          "$name!",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.openSans(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Selamat Bergabumg di Aplikasi Layanan Peminjaman Proyector LCD Kampus",
+                    style: GoogleFonts.openSans(
+                      height: 1.2,
+                      fontSize: 14,
+                      color: Colors.grey[400],
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          const SizedBox(height: 60),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Hi",
-                style: GoogleFonts.openSans(
-                  height: 1,
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                name ?? "Your Name Here",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.openSans(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "Selamat datang di aplikasi layanan peminjaman proyektor lcd kampus",
-                style: GoogleFonts.openSans(
-                  height: 1,
-                  fontSize: 13,
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
