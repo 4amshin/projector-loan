@@ -37,7 +37,7 @@ class StTopProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SvgPicture.asset(
-                    "assets/icons/dashboard.svg",
+                    "assets/icons/dashboard-dot.svg",
                     height: 28,
                     colorFilter: const ColorFilter.mode(
                       Colors.black54,

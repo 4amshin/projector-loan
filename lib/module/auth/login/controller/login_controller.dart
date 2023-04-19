@@ -29,36 +29,42 @@ class LoginController extends State<LoginView> implements MvcController {
   String? email;
   String? password;
 
-  //execute login operation
-  doLogin() async {
+  // execute login operation
+  Future<void> doLogin() async {
     log("Email: $email");
     log("Password: $password");
 
     log("Try to Login....");
+
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email!,
         password: password!,
       );
-      if (currentUser?.emailVerified == true) {
+
+      if (userCredential.user?.emailVerified == true) {
         log("Navigate to Student Dashboard");
         Get.offAll(const StMainNavigationView());
-      }
-      if (currentUser?.emailVerified == false) {
+      } else {
         showSnackbarMessage("Email belum diverifikasi");
-        await currentUser?.sendEmailVerification();
+        await userCredential.user?.sendEmailVerification();
         showSnackbarMessage("Mengirim Link Verifikasi");
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        showSnackbarMessage('Pengguna tidak ditemukan');
-      } else if (e.code == 'invalid-email') {
-        showSnackbarMessage('Email tidak terdaftar');
-      } else if (e.code == 'wrong-password') {
-        showSnackbarMessage("Password anda salah");
-      } else {
-        log("Error during login: $e");
-        showSnackbarMessage("Terjadi kesalahan saat login");
+      switch (e.code) {
+        case 'user-not-found':
+          showSnackbarMessage('Pengguna tidak ditemukan');
+          break;
+        case 'invalid-email':
+          showSnackbarMessage('Email tidak terdaftar');
+          break;
+        case 'wrong-password':
+          showSnackbarMessage("Password anda salah");
+          break;
+        default:
+          log("Error during login: $e");
+          showSnackbarMessage("Terjadi kesalahan saat login");
       }
     }
   }
