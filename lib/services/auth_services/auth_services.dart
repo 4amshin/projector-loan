@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 
 class AuthService {
-  static Future<void> createNewUser({
+  static Future<bool> createNewUser(
+    BuildContext context, {
     required String email,
     required String password,
   }) async {
@@ -18,16 +19,21 @@ class AuthService {
       );
 
       //send email verification
-      // await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      // log('Email verification sent to ${FirebaseAuth.instance.currentUser!.email}');
+      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+      ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
+      log('Email verification sent to ${FirebaseAuth.instance.currentUser!.email}');
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        log('The password provided is too weak.');
+        ShowSnackBar.show(context, message: "Kombinasi passoword lemah");
       } else if (e.code == 'email-already-in-use') {
-        log('The account already exists for that email.');
+        ShowSnackBar.show(context,
+            message: "Akun sudah ada untuk email tersebut");
       }
+      return false;
     } catch (e) {
       log(e.toString());
+      return false;
     }
   }
 

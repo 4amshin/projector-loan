@@ -62,6 +62,7 @@ class RegisterController extends State<RegisterView> implements MvcController {
     try {
       log("Register New User");
       await AuthService.createNewUser(
+        context,
         email: email!,
         password: password!,
       );
