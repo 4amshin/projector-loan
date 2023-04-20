@@ -11,7 +11,9 @@ dialogButton({
     height: 35,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
         backgroundColor: backgroundColor ?? Colors.blueGrey,
       ),
       onPressed: onTap,

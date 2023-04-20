@@ -4,10 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class StMidContentCard extends StatelessWidget {
   final String title;
+  final Color color;
   final void Function()? onTap;
   const StMidContentCard({
     Key? key,
     required this.title,
+    required this.color,
     this.onTap,
   }) : super(key: key);
 
@@ -19,13 +21,13 @@ class StMidContentCard extends StatelessWidget {
         width: 200,
         margin: const EdgeInsets.only(left: 25, top: 25, bottom: 25),
         decoration: BoxDecoration(
-          color: Colors.indigoAccent,
+          color: color,
           borderRadius: BorderRadius.circular(30),
           image: const DecorationImage(
             image: AssetImage('assets/images/motif.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Color.fromARGB(255, 123, 143, 251),
+              Colors.white12,
               BlendMode.srcIn,
             ),
           ),

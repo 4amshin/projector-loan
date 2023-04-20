@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projector_loan/core.dart';
 import 'package:projector_loan/model/loan_term.dart';
-import 'package:projector_loan/module/student/st_home/widget/st_detail_page.dart';
 import 'package:projector_loan/module/student/st_home/widget/st_mid_content_card.dart';
-import 'package:projector_loan/state_util.dart';
+import 'package:projector_loan/shared/widget/dialog/show_big_info.dart';
 
 class StMidContent extends StatelessWidget {
   const StMidContent({Key? key}) : super(key: key);
@@ -50,9 +50,10 @@ class StMidContent extends StatelessWidget {
 
                   return StMidContentCard(
                     title: loanTerm.title,
-                    onTap: () => Get.to(
-                      StDetailPage(loanTerm: loanTerm),
-                    ),
+                    color: Color(int.parse("0xff${loanTerm.color}")),
+                    onTap: () async {
+                      showBigInfo(loanTerm: loanTerm);
+                    },
                   );
                 },
               );
