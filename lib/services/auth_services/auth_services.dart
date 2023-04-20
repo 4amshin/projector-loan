@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projector_loan/module/student/st_main_navigation/view/st_main_navigation_view.dart';
-import 'package:projector_loan/shared/widget/snackbar/show_snackbar.dart';
-import 'package:projector_loan/state_util.dart';
+import 'package:projector_loan/core.dart';
 
 class AuthService {
   static Future<void> createNewUser({
@@ -49,10 +47,11 @@ class AuthService {
         log("Navigate to Student Dashboard");
         Get.offAll(const StMainNavigationView());
       } else {
+        ShowSnackBar.show(context, message: "Email belum diverifikasi");
         if (userCredential.user != null) {
           await userCredential.user?.sendEmailVerification();
+          log("Sending Email Verification");
         }
-        ShowSnackBar.show(context, message: "Email belum diverifikasi");
         ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
       }
     } on FirebaseAuthException catch (e) {
@@ -84,7 +83,6 @@ class AuthService {
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection("students")
-          .where("nim", isEqualTo: nim)
           .where("email", isEqualTo: email)
           .get();
 
