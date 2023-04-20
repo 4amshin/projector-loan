@@ -1,13 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/auth/email_verification/view/email_verification_view.dart';
-import 'package:projector_loan/module/auth/login/view/login_view.dart';
-import 'package:projector_loan/module/auth/register/view/register_view.dart';
-import 'package:projector_loan/services/auth_services/auth_services.dart';
-import 'package:projector_loan/state_util.dart';
 
 class RegisterController extends State<RegisterView> implements MvcController {
   static late RegisterController instance;

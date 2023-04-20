@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/module/auth/email_verification/controller/email_verification_controller.dart';
@@ -21,8 +22,12 @@ class AtEmailVerify extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // controller.isEmailVerified
+            //     ? const SizedBox.shrink()
+            //     : const CircularProgressIndicator(),
+            // const SizedBox(height: 20),
             Text(
-              "Link verifikasi telah terkirim ke email ${controller.currentUser!.email}, tolong cek email anda!",
+              "Link verifikasi telah terkirim ke email ${FirebaseAuth.instance.currentUser?.email}, tolong cek email anda!",
               textAlign: TextAlign.center,
               style: GoogleFonts.openSans(
                 fontSize: 15.0,
