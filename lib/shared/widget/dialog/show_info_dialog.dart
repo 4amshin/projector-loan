@@ -2,7 +2,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projector_loan/shared/widget/dialog/dialogButton.dart';
+import 'package:projector_loan/shared/widget/dialog/dialog_button.dart';
 import 'package:projector_loan/state_util.dart';
 
 Future showInfoDialog({

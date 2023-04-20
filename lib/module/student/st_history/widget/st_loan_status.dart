@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/student/st_history/widget/st_loan_status_card.dart';
-import 'package:projector_loan/shared/widget/no_data/no_data_img.dart';
 
 class StLoanStatus extends StatelessWidget {
   final String status;
@@ -52,9 +50,9 @@ class StLoanStatus extends StatelessWidget {
 
               //initialize data
               String docId = item["id"];
-              String studentName = item["student_name"];
-              String studentNim = item["student_nim"];
-              String studentImg = item["student_profile"];
+              // String studentName = item["student_name"];
+              // String studentNim = item["student_nim"];
+              // String studentImg = item["student_profile"];
               String lcdName = item["lcd_name"];
               DateTime loanDate = item["loan_date"].toDate();
               DateTime returnDate =

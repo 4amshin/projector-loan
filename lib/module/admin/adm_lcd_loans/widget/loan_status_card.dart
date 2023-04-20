@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/admin/adm_lcd_loans/widget/card_button.dart';
 
 class LoanStatusCard extends StatelessWidget {
   final String name;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
@@ -22,5 +24,10 @@ class StHomeController extends State<StHomeView> implements MvcController {
 
   scanQrCode() {
     Get.to(const StScannerView());
+  }
+
+  toLcdStatusPage() {
+    log("Navigate to Lcd Status Page");
+    Get.to(const StLcdStatusListView());
   }
 }

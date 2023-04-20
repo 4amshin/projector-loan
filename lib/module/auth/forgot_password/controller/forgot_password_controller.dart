@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/state_util.dart';
-import '../view/forgot_password_view.dart';
 
 class ForgotPasswordController extends State<ForgotPasswordView>
     implements MvcController {

@@ -12,6 +12,7 @@
         "student/st_profile_edit_form",
         "student/st_scanner",
         "student/st_lcd_detail",
+        "student/st_lcd_status_list",
         "admin/adm_main_navigation",
         "admin/adm_dashboard",
         "admin/adm_lcd_data",

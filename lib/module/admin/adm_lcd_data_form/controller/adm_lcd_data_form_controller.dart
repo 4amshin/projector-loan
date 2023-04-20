@@ -1,12 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/services/lcd_services/lcd_service.dart';
-import 'package:projector_loan/shared/widget/dialog/confirmation_dialog.dart';
-import 'package:projector_loan/state_util.dart';
-import '../view/adm_lcd_data_form_view.dart';
 
 class AdmLcdDataFormController extends State<AdmLcdDataFormView>
     implements MvcController {

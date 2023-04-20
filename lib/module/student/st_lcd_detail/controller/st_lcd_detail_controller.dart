@@ -1,14 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/student/st_lcd_detail/view/st_lcd_detail_view.dart';
-import 'package:projector_loan/module/student/st_scanner/view/st_scanner_view.dart';
-import 'package:projector_loan/services/loan_services/loan_service.dart';
-import 'package:projector_loan/state_util.dart';
 
 class StLcdDetailController extends State<StLcdDetailView>
     implements MvcController {

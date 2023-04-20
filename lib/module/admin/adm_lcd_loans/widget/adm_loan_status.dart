@@ -54,7 +54,7 @@ class AdmLoanStatus extends StatelessWidget {
               String studentNim = item["student_nim"];
               String studentImg = item["student_profile"];
               String lcdName = item["lcd_name"];
-              DateTime loanAt = item["loan_date"].toDate();
+              // DateTime loanAt = item["loan_date"].toDate();
 
               bool requestRefund = item["on_return"];
 

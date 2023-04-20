@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/module/student/st_lcd_status_list/widget/st_lcd_status_card.dart';
 
-class AdmLcdLoansView extends StatefulWidget {
-  const AdmLcdLoansView({Key? key}) : super(key: key);
+class StLcdStatusListView extends StatefulWidget {
+  const StLcdStatusListView({Key? key}) : super(key: key);
 
-  Widget build(context, AdmLcdLoansController controller) {
+  Widget build(context, StLcdStatusListController controller) {
     controller.view = this;
 
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.indigoAccent,
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
           title: const AppBarTitle(
-            title: 'Peminjaman LCD',
+            title: 'Daftar LCD',
             color: Colors.white,
           ),
           bottom: TabBar(
-            isScrollable: true,
+            // isScrollable: true,
             indicatorColor: Colors.indigo,
             labelColor: Colors.white,
             labelStyle: GoogleFonts.openSans(
@@ -33,29 +41,21 @@ class AdmLcdLoansView extends StatefulWidget {
             unselectedLabelColor: Colors.white54,
             tabs: const [
               Tab(
-                text: "Request",
+                text: "Tersedia",
               ),
               Tab(
-                text: "Sedang Digunakan",
-              ),
-              Tab(
-                text: "Di Kembalikan",
+                text: "Tidak Tersedia",
               ),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            AdmLoanStatus(
-              status: 'Request',
-              displayRequestButton: true,
-              acceptRequest: true,
+            StLcdStatusCard(
+              status: "Tersedia",
             ),
-            AdmLoanStatus(
-              status: 'OnUse',
-            ),
-            AdmLoanStatus(
-              status: 'Returned',
+            StLcdStatusCard(
+              status: "Tidak Tersedia",
             ),
           ],
         ),
@@ -64,5 +64,5 @@ class AdmLcdLoansView extends StatefulWidget {
   }
 
   @override
-  State<AdmLcdLoansView> createState() => AdmLcdLoansController();
+  State<StLcdStatusListView> createState() => StLcdStatusListController();
 }

@@ -22,7 +22,7 @@ class StMidContentCard extends StatelessWidget {
         margin: const EdgeInsets.only(left: 25, top: 25, bottom: 25),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(35),
           image: const DecorationImage(
             image: AssetImage('assets/images/motif.png'),
             fit: BoxFit.cover,
@@ -33,10 +33,9 @@ class StMidContentCard extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withOpacity(0.3),
               offset: const Offset(5, 10),
-              blurRadius: 10,
-              spreadRadius: 2,
+              blurRadius: 7,
               // spreadRadius: 2,
             ),
           ],

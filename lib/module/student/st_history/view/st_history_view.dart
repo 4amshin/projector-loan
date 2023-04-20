@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/module/student/st_history/widget/st_loan_status.dart';
 
 class StHistoryView extends StatefulWidget {
   const StHistoryView({Key? key}) : super(key: key);

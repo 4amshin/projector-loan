@@ -37,12 +37,8 @@ class StTopProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SvgPicture.asset(
-                    "assets/icons/dashboard-dot.svg",
+                    "assets/icons/uncp-color.svg",
                     height: 28,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.black54,
-                      BlendMode.srcIn,
-                    ),
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.grey.withOpacity(0.5),
