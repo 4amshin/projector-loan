@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projector_loan/core.dart';
 import 'package:projector_loan/module/auth/email_verification/view/email_verification_view.dart';
 import 'package:projector_loan/module/auth/login/view/login_view.dart';
 import 'package:projector_loan/module/auth/register/view/register_view.dart';
@@ -34,22 +35,27 @@ class RegisterController extends State<RegisterView> implements MvcController {
   //function for register user
   doRegister() async {
     if (fullName?.isEmpty ?? true) {
-      showSnackbarMessage('Masukkkan nama lengkap anda');
+      ShowSnackBar.show(context, message: "Masukkan nama lengkap anda");
       return;
     }
 
     if (nim?.isEmpty ?? true) {
-      showSnackbarMessage('Masukkan NIM anda');
+      ShowSnackBar.show(context, message: "Masukkkan NIM anda");
+
       return;
     }
 
+    if (nim!.length < 10) {
+      ShowSnackBar.show(context, message: "Masukkan NIM yang lengkap");
+    }
+
     if (email?.isEmpty ?? true) {
-      showSnackbarMessage('Masukkkan Email yang benar');
+      ShowSnackBar.show(context, message: "Masukkan email yang benar");
       return;
     }
 
     if (password == null || password!.length < 6) {
-      showSnackbarMessage('Kata Sandi minimal 6 karakter');
+      ShowSnackBar.show(context, message: "Kata sandi minimal 6 Karakter");
       return;
     }
 
@@ -69,23 +75,11 @@ class RegisterController extends State<RegisterView> implements MvcController {
 
       Get.to(const EmailVerificationView());
     } catch (e) {
-      showSnackbarMessage(e.toString());
+      ShowSnackBar.show(context, message: e.toString());
     }
   }
 
   toLoginView() {
     Get.offAll(const LoginView());
-  }
-
-  void showSnackbarMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.redAccent,
-        content: Text(
-          message,
-          style: GoogleFonts.openSans(fontWeight: FontWeight.w500),
-        ),
-      ),
-    );
   }
 }
