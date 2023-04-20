@@ -33,8 +33,8 @@ class LoginController extends State<LoginView> implements MvcController {
   doLoginWithEmail() {
     AuthService.signInWithEmail(
       context,
-      email!,
-      password!,
+      email: email!,
+      password: password!,
     );
   }
 

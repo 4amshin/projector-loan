@@ -34,22 +34,25 @@ class AuthService {
   }
 
   static Future<void> signInWithEmail(
-    BuildContext context,
-    String email,
-    String password,
-  ) async {
+    BuildContext context, {
+    required String email,
+    required String password,
+  }) async {
     try {
       final userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (userCredential.user?.emailVerified == true) {
+      if (userCredential.user != null &&
+          userCredential.user!.emailVerified == true) {
         log("Navigate to Student Dashboard");
         Get.offAll(const StMainNavigationView());
       } else {
+        if (userCredential.user != null) {
+          await userCredential.user?.sendEmailVerification();
+        }
         ShowSnackBar.show(context, message: "Email belum diverifikasi");
-        await userCredential.user?.sendEmailVerification();
         ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
       }
     } on FirebaseAuthException catch (e) {
@@ -85,7 +88,16 @@ class AuthService {
           .where("email", isEqualTo: email)
           .get();
 
-      if (querySnapshot.docs.isEmpty) {
+      if (querySnapshot.docs.isNotEmpty) {
+        final docId = querySnapshot.docs[0].id;
+        await FirebaseFirestore.instance
+            .collection("students")
+            .doc(docId)
+            .update({
+          "name": name,
+          "nim": nim,
+        });
+      } else {
         await FirebaseFirestore.instance.collection("students").add({
           "foto": "https://bit.ly/413L5Z3",
           "email": email,
