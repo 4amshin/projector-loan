@@ -51,7 +51,7 @@ class AtLoginContent extends StatelessWidget {
         const SizedBox(height: 15),
         AtRegistrationButton(
           title: 'LOGIN',
-          onTap: () => controller.doLogin(),
+          onTap: () => controller.doLoginWithEmail(),
         ),
         const SizedBox(height: 20),
         AtAccountConfirmation(

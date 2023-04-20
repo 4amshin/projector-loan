@@ -2,6 +2,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:projector_loan/module/student/st_main_navigation/view/st_main_navigation_view.dart';
+import 'package:projector_loan/shared/widget/snackbar/show_snackbar.dart';
+import 'package:projector_loan/state_util.dart';
 
 class AuthService {
   static Future<void> createNewUser({
@@ -29,43 +33,43 @@ class AuthService {
     }
   }
 
-  static Future<String?> signInWithEmail(String email, String password) async {
+  static Future<void> signInWithEmail(
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
     try {
-      final UserCredential userCredential =
+      final userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      final User? user = userCredential.user;
-      if (user != null) {
-        await user
-            .reload(); // Reload user to get updated email verification status
-        if (user.emailVerified) {
-          return user.uid;
-        } else {
-          await FirebaseAuth.instance
-              .signOut(); // Sign out user if email is not verified
-          log("Please verify your email before signing in.");
-          return "Please verify your email before signing in.";
-        }
+      if (userCredential.user?.emailVerified == true) {
+        log("Navigate to Student Dashboard");
+        Get.offAll(const StMainNavigationView());
       } else {
-        return null;
+        ShowSnackBar.show(context, message: "Email belum diverifikasi");
+        await userCredential.user?.sendEmailVerification();
+        ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        log("User not found");
-        return "User not found";
-      } else if (e.code == 'wrong-password') {
-        log("Wrong Password");
+      switch (e.code) {
+        case 'user-not-found':
+          ShowSnackBar.show(context, message: "Pengguna tidak ditemukan");
 
-        return "Wrong password";
-      } else {
-        log("Sign in failed. Please try again later.");
-        return "Sign in failed. Please try again later.";
+          break;
+        case 'invalid-email':
+          ShowSnackBar.show(context, message: "Email tidak terdaftar");
+
+          break;
+        case 'wrong-password':
+          ShowSnackBar.show(context, message: "Password anda salah");
+
+          break;
+        default:
+          log("Error during login: $e");
+          ShowSnackBar.show(context, message: "Terjadi kesalahan saat login");
       }
-    } catch (e) {
-      log("An error occurred. Please try again later.");
-      return "An error occurred. Please try again later.";
     }
   }
 
