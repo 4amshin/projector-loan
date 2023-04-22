@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/model/student_model.dart';
 
 class StProfileController extends State<StProfileView>
     implements MvcController {
@@ -39,18 +40,12 @@ class StProfileController extends State<StProfileView>
   }
 
   toEditProfile({
-    required String imgUrl,
-    required String docId,
-    required String name,
-    required String nim,
+    required Student student,
   }) {
     log("Navigate to Edit Profile Page");
     Get.to(
       StProfileEditFormView(
-        docId: docId,
-        imgUrl: imgUrl,
-        name: name,
-        nim: nim,
+        student: student,
       ),
     );
   }

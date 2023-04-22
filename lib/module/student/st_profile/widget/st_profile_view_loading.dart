@@ -39,17 +39,16 @@ class StProfileViewLoading extends StatelessWidget {
       ),
     );
 
-    return Expanded(
-      child: ListView(
-        children: [
-          const SizedBox(height: 35),
-          Center(child: avatar),
-          const SizedBox(height: 10),
-          nameBox,
-          const SizedBox(height: 10),
-          titleBox,
-        ],
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: 35),
+        Center(child: avatar),
+        const SizedBox(height: 10),
+        nameBox,
+        const SizedBox(height: 10),
+        titleBox,
+        const SizedBox(height: 25),
+      ],
     );
   }
 

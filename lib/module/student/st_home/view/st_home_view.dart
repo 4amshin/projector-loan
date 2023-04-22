@@ -11,6 +11,7 @@ class StHomeView extends StatefulWidget {
       backgroundColor: homeBackground.withOpacity(0.4),
       body: SafeArea(
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
             const StTopProfile(),
             const StMidContent(),

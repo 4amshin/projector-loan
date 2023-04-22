@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/model/student_model.dart';
 
 class StTopProfile extends StatelessWidget {
   const StTopProfile({
@@ -13,22 +14,18 @@ class StTopProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StHomeController controller = StHomeController.instance;
-    return StreamBuilder(
+    return StreamBuilder<Student>(
       stream: FirebaseFirestore.instance
           .collection('students')
           .where("email", isEqualTo: controller.currentUser.email)
-          .snapshots(),
+          .snapshots()
+          .map((snapshot) => Student.fromFirestore(snapshot.docs.first)),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const StTopProfileLoading();
         }
 
-        final doc = snapshot.data!.docs.first;
-        // final email = doc.get('email') as String;
-        final name = doc.get('name') as String;
-        final imgUrl = doc.get('foto') as String;
-        // final nim = doc.get('nim') as String;
-        // final role = doc.get('role') as String;
+        final student = snapshot.data!;
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
           child: Column(
@@ -44,7 +41,7 @@ class StTopProfile extends StatelessWidget {
                     backgroundColor: Colors.grey.withOpacity(0.5),
                     radius: 18,
                     child: WdCachedImage(
-                      imgUrl: imgUrl,
+                      imgUrl: student.imgUrl,
                       size: 40,
                       borderRadius: 20,
                     ),
@@ -69,7 +66,7 @@ class StTopProfile extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          "$name!",
+                          "${student.name}!",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.openSans(

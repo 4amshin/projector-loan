@@ -18,7 +18,7 @@ class StProfileView extends StatefulWidget {
           right: 25,
           top: 45,
         ),
-        child: Column(
+        child: ListView(
           children: [
             StLogoutButton(onTap: () => controller.doLogOut()),
             const StProfileStream(),

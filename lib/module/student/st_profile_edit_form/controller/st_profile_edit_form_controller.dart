@@ -14,10 +14,10 @@ class StProfileEditFormController extends State<StProfileEditFormView>
   @override
   void initState() {
     instance = this;
-    docId = widget.docId;
-    imgUrl = widget.imgUrl;
-    name = widget.name;
-    nim = widget.nim;
+    docId = widget.student.id;
+    imgUrl = widget.student.imgUrl;
+    name = widget.student.name;
+    nim = widget.student.nim;
     super.initState();
   }
 
