@@ -2,7 +2,6 @@
 import 'dart:developer';
 
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/data/model/lcd_data_model.dart';
 
 class StLcdStatusCard extends StatelessWidget {
   final String status;

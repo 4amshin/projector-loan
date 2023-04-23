@@ -110,5 +110,6 @@ export 'package:projector_loan/presentation/module/student/st_lcd_status_list/wi
 export 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 export 'package:qr_code_scanner/qr_code_scanner.dart';
 export 'package:uuid/uuid.dart';
+export 'package:projector_loan/data/model/lcd_data_model.dart';
 
 export 'state_util.dart';

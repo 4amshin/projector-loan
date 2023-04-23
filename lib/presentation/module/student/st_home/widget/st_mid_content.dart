@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/presentation/shared/widget/loading/st_mid_content_card_loading.dart';
 
 class StMidContent extends StatelessWidget {
   const StMidContent({Key? key}) : super(key: key);
@@ -27,9 +25,20 @@ class StMidContent extends StatelessWidget {
             stream:
                 FirebaseFirestore.instance.collection("loan_term").snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: 2,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return const StMidContentCardLoading();
+                  },
+                );
+              }
+
+              if (snapshot.hasError) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: Text("Error"),
                 );
               }
 
