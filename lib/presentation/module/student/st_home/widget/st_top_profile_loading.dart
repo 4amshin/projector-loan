@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:projector_loan/core.dart';
 
 class StTopProfileLoading extends StatelessWidget {
   const StTopProfileLoading({Key? key}) : super(key: key);
@@ -12,8 +11,8 @@ class StTopProfileLoading extends StatelessWidget {
 
     final smallBox = _buildShimmer(
       Container(
-        height: 10,
-        width: 40,
+        height: 45,
+        width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.grey,
           borderRadius: BorderRadius.circular(3),
@@ -23,8 +22,8 @@ class StTopProfileLoading extends StatelessWidget {
 
     final largeBox = _buildShimmer(
       Container(
-        height: 15,
-        width: 150,
+        height: 23,
+        width: MediaQuery.of(context).size.width * 0.7,
         decoration: BoxDecoration(
           color: Colors.grey,
           borderRadius: BorderRadius.circular(3),
@@ -32,20 +31,30 @@ class StTopProfileLoading extends StatelessWidget {
       ),
     );
 
-    return Row(
-      children: [
-        circleAvatar,
-        const SizedBox(width: 10),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            smallBox,
-            const SizedBox(height: 4),
-            largeBox,
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              circleAvatar,
+              circleAvatar,
+            ],
+          ),
+          const SizedBox(height: 25),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              largeBox,
+              const SizedBox(height: 4),
+              smallBox,
+            ],
+          ),
+        ],
+      ),
     );
   }
 

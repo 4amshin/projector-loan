@@ -69,7 +69,7 @@ export 'package:projector_loan/presentation/module/student/st_profile/widget/st_
 export 'package:projector_loan/presentation/module/student/st_profile/widget/st_profile_detail_item.dart';
 export 'package:projector_loan/presentation/module/student/st_profile/widget/st_profile_image.dart';
 export 'package:projector_loan/presentation/module/student/st_profile/widget/st_profile_stream.dart';
-export 'package:projector_loan/presentation/module/student/st_profile/widget/st_profile_view_loading.dart';
+export 'package:projector_loan/presentation/shared/widget/loading/st_profile_view_loading.dart';
 export 'package:projector_loan/presentation/module/student/st_profile_edit_form/controller/st_profile_edit_form_controller.dart';
 export 'package:projector_loan/presentation/module/student/st_profile_edit_form/view/st_profile_edit_form_view.dart';
 export 'package:projector_loan/presentation/module/student/st_profile_edit_form/widget/st_save_button.dart';
@@ -111,5 +111,6 @@ export 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 export 'package:qr_code_scanner/qr_code_scanner.dart';
 export 'package:uuid/uuid.dart';
 export 'package:projector_loan/data/model/lcd_data_model.dart';
+export 'package:shimmer/shimmer.dart';
 
 export 'state_util.dart';

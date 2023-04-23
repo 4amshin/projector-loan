@@ -17,11 +17,18 @@ class StTopProfile extends StatelessWidget {
           .snapshots()
           .map((snapshot) => Student.fromFirestore(snapshot.docs.first)),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const StTopProfileLoading();
         }
 
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text("Error"),
+          );
+        }
+
         final student = snapshot.data!;
+
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
           child: Column(
