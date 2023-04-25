@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:projector_loan/core.dart';
 import 'package:projector_loan/presentation/module/admin/adm_lcd_data/view/adm_lcd_data_view.dart';
 import 'package:projector_loan/presentation/module/admin/adm_lcd_data_form/view/adm_lcd_data_form_view.dart';
 import 'package:projector_loan/state_util.dart';
@@ -30,7 +31,7 @@ class AdmLcdDataController extends State<AdmLcdDataView>
   }
 
   //edit data
-  lcdEditForm({required Map item}) {
+  lcdEditForm({required LCDData item}) {
     log("Navigate to Lcd Edit Form");
     Get.to(
       AdmLcdDataFormView(

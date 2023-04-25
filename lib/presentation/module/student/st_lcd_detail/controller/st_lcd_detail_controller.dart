@@ -1,8 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 
 class StLcdDetailController extends State<StLcdDetailView>

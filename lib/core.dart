@@ -112,5 +112,7 @@ export 'package:qr_code_scanner/qr_code_scanner.dart';
 export 'package:uuid/uuid.dart';
 export 'package:projector_loan/data/model/lcd_data_model.dart';
 export 'package:shimmer/shimmer.dart';
+export 'package:projector_loan/presentation/shared/widget/input_field/dropdown.dart';
+export 'package:qr_flutter/qr_flutter.dart';
 
 export 'state_util.dart';

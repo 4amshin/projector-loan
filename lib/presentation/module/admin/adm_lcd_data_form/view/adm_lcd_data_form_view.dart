@@ -1,17 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
-import 'package:projector_loan/presentation/module/admin/adm_lcd_data_form/widget/adm_delete_button.dart';
-import 'package:projector_loan/presentation/module/admin/adm_lcd_data_form/widget/adm_save_button.dart';
-import 'package:projector_loan/presentation/shared/util/validator/validator.dart';
-import 'package:projector_loan/presentation/shared/widget/appBar_title/app_bar_title.dart';
-import 'package:projector_loan/presentation/shared/widget/input_field/dropdown.dart';
-import 'package:projector_loan/presentation/shared/widget/input_field/q_text_field.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-
-import '../controller/adm_lcd_data_form_controller.dart';
+import 'package:projector_loan/core.dart';
 
 class AdmLcdDataFormView extends StatefulWidget {
-  final Map? item;
+  final LCDData? item;
   const AdmLcdDataFormView({
     Key? key,
     this.item,

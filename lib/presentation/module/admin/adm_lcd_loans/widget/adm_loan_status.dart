@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/data/model/loan_data_model.dart';
 
 class AdmLoanStatus extends StatelessWidget {
   final String status;
@@ -40,44 +41,36 @@ class AdmLoanStatus extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: data.docs.length,
             itemBuilder: (context, index) {
-              Map<String, dynamic> item = (data.docs[index].data());
+              final item = LoanData.fromFirebase(data.docs[index].data());
 
-              //initialize data
-              String studentName = item["student_name"];
-              String studentNim = item["student_nim"];
-              String studentImg = item["student_profile"];
-              String lcdName = item["lcd_name"];
-              String lcdId = item["lcd_id"];
-              // DateTime loanAt = item["loan_date"].toDate();
-
-              bool requestRefund = item["on_return"];
+              // bool requestRefund = item.onReturn;
 
               return LoanStatusCard(
-                name: studentName,
-                nim: studentNim,
-                imgUrl: studentImg,
-                lcdName: lcdName,
+                name: item.studentName,
+                nim: item.studentNim,
+                imgUrl: item.studentProfile,
+                lcdName: item.lcdName,
                 requestButton: displayRequestButton,
-                returnedButton: requestRefund,
+                returnedButton: item.onReturn,
                 isRequest: status == 'Request' ? true : false,
                 isReturned: status == 'Returned' ? true : false,
                 onAccept: () {
                   if (displayRequestButton && acceptRequest) {
                     controller.acceptRequest(
-                      lcdId: lcdId,
+                      lcdId: item.lcdId,
                       status: 'OnUse',
                     );
                   }
                 },
                 onReject: () {
                   if (displayRequestButton) {
-                    controller.rejectRequest(lcdId: lcdId);
+                    controller.rejectRequest(lcdId: item.lcdId);
                   }
                 },
                 onReturn: () {
-                  if (requestRefund) {
+                  if (item.onReturn) {
                     controller.confirmReturned(
-                      lcdId: lcdId,
+                      lcdId: item.lcdId,
                       status: 'Returned',
                     );
                   }

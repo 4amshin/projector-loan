@@ -11,16 +11,15 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
   void initState() {
     instance = this;
     if (isEditMode) {
-      docId = widget.item!["id"];
-      lcdId = widget.item!["lcd_id"];
-      lcdName = widget.item!["lcd_name"];
-      lcdBrand = widget.item!["brand"];
-      resolution = widget.item!["resolution"];
-      weight = widget.item!["weight"];
-      port = widget.item!["port"];
-      status = widget.item!["status"];
+      lcdId = widget.item?.lcdId;
+      lcdName = widget.item?.lcdName;
+      lcdBrand = widget.item?.lcdBrand;
+      resolution = widget.item?.lcdResolution;
+      weight = widget.item?.lcdWeight;
+      port = widget.item?.lcdPorts;
+      status = widget.item?.lcdStatus;
 
-      qrCodeData = widget.item!["lcd_id"];
+      qrCodeData = widget.item!.lcdId;
     }
     super.initState();
   }
@@ -35,7 +34,6 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
     return widget.item != null;
   }
 
-  String? docId;
   String? lcdId;
   String? lcdName;
   String? lcdBrand;
