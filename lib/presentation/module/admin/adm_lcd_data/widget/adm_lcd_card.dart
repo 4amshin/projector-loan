@@ -70,14 +70,28 @@ class AdmLcdCard extends StatelessWidget {
                             fontWeight: FontWeight.w800,
                           ),
                         ),
-                        const SizedBox(width: 5.0),
+                        const SizedBox(width: 10),
                         CircleAvatar(
                           radius: 4,
                           backgroundColor: status == "Tersedia"
                               ? Colors.greenAccent
                               : status == "Dipakai"
-                                  ? Colors.yellowAccent
+                                  ? Colors.lightBlue
                                   : Colors.redAccent,
+                        ),
+                        const SizedBox(width: 3),
+                        Text(
+                          status,
+                          style: GoogleFonts.openSans(
+                            fontSize: 10.0,
+                            color: status == "Tersedia"
+                                ? Colors.greenAccent[700]
+                                : status == "Dipakai"
+                                    ? Colors.lightBlue
+                                    : Colors.redAccent,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),

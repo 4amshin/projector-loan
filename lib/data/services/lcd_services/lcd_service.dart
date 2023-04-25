@@ -9,7 +9,7 @@ class LcdService {
     required String weight,
     required String port,
   }) async {
-    await FirebaseFirestore.instance.collection("data_lcd").add({
+    await FirebaseFirestore.instance.collection("data_lcd").doc(lcdId).set({
       "lcd_id": lcdId,
       "lcd_name": lcdName,
       "brand": lcdBrand,
@@ -21,7 +21,6 @@ class LcdService {
   }
 
   static updateData({
-    required String docId,
     required String lcdId,
     required String lcdName,
     required String lcdBrand,
@@ -30,8 +29,7 @@ class LcdService {
     required String port,
     required String status,
   }) async {
-    await FirebaseFirestore.instance.collection("data_lcd").doc(docId).update({
-      "lcd_id": lcdId,
+    await FirebaseFirestore.instance.collection("data_lcd").doc(lcdId).update({
       "lcd_name": lcdName,
       "brand": lcdBrand,
       "resolution": resolution,
@@ -41,9 +39,18 @@ class LcdService {
     });
   }
 
-  static deleteData({
-    required String docId,
+  static updateLCDStatus({
+    required String lcdId,
+    required String status,
   }) async {
-    await FirebaseFirestore.instance.collection("data_lcd").doc(docId).delete();
+    await FirebaseFirestore.instance.collection("data_lcd").doc(lcdId).update({
+      "status": status //option style, - Tersedia, Rusak, Sedang Dipinjam
+    });
+  }
+
+  static deleteData({
+    required String lcdId,
+  }) async {
+    await FirebaseFirestore.instance.collection("data_lcd").doc(lcdId).delete();
   }
 }

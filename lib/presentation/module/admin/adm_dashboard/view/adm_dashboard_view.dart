@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:projector_loan/presentation/module/admin/adm_dashboard/controller/adm_dashboard_controller.dart';
-import 'package:projector_loan/presentation/module/student/st_home/widget/st_top_profile.dart';
-import 'package:projector_loan/presentation/shared/widget/appBar_title/app_bar_title.dart';
+import 'package:projector_loan/core.dart';
 
 class AdmDashboardView extends StatefulWidget {
   const AdmDashboardView({Key? key}) : super(key: key);
@@ -16,9 +13,7 @@ class AdmDashboardView extends StatefulWidget {
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
-          children: const [
-            StTopProfile(),
-          ],
+          children: const [],
         ),
       ),
     );

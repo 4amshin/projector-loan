@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 
 class AdmLcdLoansController extends State<AdmLcdLoansView>
@@ -22,15 +20,19 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
   Widget build(BuildContext context) => widget.build(context, this);
 
   acceptRequest({
-    required String docId,
+    required String lcdId,
     required String status,
   }) async {
     await confirmationDialog(
       message: "Terima Request?",
       onYes: () async {
         await LoanService.updateLoanStatus(
-          docId: docId,
+          lcdId: lcdId,
           status: status,
+        );
+        await LcdService.updateLCDStatus(
+          lcdId: lcdId,
+          status: "Dipakai",
         );
         Get.back();
         log("Request Accepted");
@@ -39,13 +41,13 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
   }
 
   rejectRequest({
-    required String docId,
+    required String lcdId,
   }) async {
     await confirmationDialog(
       message: "Tolak Request?",
       onYes: () async {
         await LoanService.deleteLoanData(
-          docId: docId,
+          lcdId: lcdId,
         );
         Get.back();
         log("Request Rejected.....\nDeleting Request");
@@ -54,23 +56,27 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
   }
 
   confirmReturned({
-    required String docId,
+    required String lcdId,
     required String status,
   }) async {
     await confirmationDialog(
       message: "LCD Dikembalikan?",
       onYes: () async {
         await LoanService.updateLoanStatus(
-          docId: docId,
+          lcdId: lcdId,
           status: status,
           onReturn: false,
         );
         await FirebaseFirestore.instance
             .collection("loan_data")
-            .doc(docId)
+            .doc(lcdId)
             .update({
           "return_date": Timestamp.now(),
         });
+        await LcdService.updateLCDStatus(
+          lcdId: lcdId,
+          status: "Tersedia",
+        );
         Get.back();
         log("LCD Returned");
       },

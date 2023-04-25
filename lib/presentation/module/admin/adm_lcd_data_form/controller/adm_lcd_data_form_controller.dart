@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 
 class AdmLcdDataFormController extends State<AdmLcdDataFormView>
@@ -53,7 +52,6 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
           message: 'Simpan Perubahan?',
           onYes: () async {
             await LcdService.updateData(
-              docId: docId!,
               lcdId: lcdId!,
               lcdName: lcdName!,
               lcdBrand: lcdBrand!,
@@ -88,7 +86,7 @@ class AdmLcdDataFormController extends State<AdmLcdDataFormView>
     await confirmationDialog(
       message: 'Hapus Data',
       onYes: () async {
-        await LcdService.deleteData(docId: docId!);
+        await LcdService.deleteData(lcdId: lcdId!);
         log("Data Deleted....\nNavigate Back");
         Get.back();
       },

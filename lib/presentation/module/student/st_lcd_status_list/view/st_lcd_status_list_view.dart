@@ -7,7 +7,7 @@ class StLcdStatusListView extends StatefulWidget {
     controller.view = this;
 
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.indigoAccent,
@@ -41,7 +41,10 @@ class StLcdStatusListView extends StatefulWidget {
                 text: "Tersedia",
               ),
               Tab(
-                text: "Tidak Tersedia",
+                text: "DiPakai",
+              ),
+              Tab(
+                text: "Rusak",
               ),
             ],
           ),
@@ -52,7 +55,10 @@ class StLcdStatusListView extends StatefulWidget {
               status: "Tersedia",
             ),
             StLcdStatusCard(
-              status: "Tidak Tersedia",
+              status: "Dipakai",
+            ),
+            StLcdStatusCard(
+              status: "Rusak",
             ),
           ],
         ),

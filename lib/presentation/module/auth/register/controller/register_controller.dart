@@ -62,7 +62,7 @@ class RegisterController extends State<RegisterView> implements MvcController {
       );
 
       log("Save Student Data");
-      await AuthService.addStudentData(
+      await StudentData.addStudentData(
         email: email!,
         name: fullName!,
         nim: nim!,

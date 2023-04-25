@@ -9,7 +9,7 @@ class LoanService {
     required String studentNim,
     required String studentProfile,
   }) async {
-    await FirebaseFirestore.instance.collection("loan_data").add({
+    await FirebaseFirestore.instance.collection("loan_data").doc(lcdId).set({
       "lcd_id": lcdId,
       "lcd_name": lcdName,
       "status": 'Request',
@@ -23,31 +23,31 @@ class LoanService {
   }
 
   static updateLoanStatus({
-    required String docId,
+    required String lcdId,
     required String status,
     final bool? onReturn,
   }) async {
-    await FirebaseFirestore.instance.collection("loan_data").doc(docId).update({
+    await FirebaseFirestore.instance.collection("loan_data").doc(lcdId).update({
       "status": status,
       "on_return": onReturn ?? false,
     });
   }
 
   static returnRequest({
-    required String docId,
+    required String lcdId,
     required bool onReturn,
   }) async {
-    await FirebaseFirestore.instance.collection("loan_data").doc(docId).update({
+    await FirebaseFirestore.instance.collection("loan_data").doc(lcdId).update({
       "on_return": onReturn,
     });
   }
 
   static deleteLoanData({
-    required String docId,
+    required String lcdId,
   }) async {
     await FirebaseFirestore.instance
         .collection("loan_data")
-        .doc(docId)
+        .doc(lcdId)
         .delete();
   }
 }

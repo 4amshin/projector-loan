@@ -1,12 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-
-import 'package:projector_loan/presentation/module/admin/adm_lcd_loans/controller/adm_lcd_loans_controller.dart';
-import 'package:projector_loan/presentation/module/admin/adm_lcd_loans/widget/loan_status_card.dart';
-import 'package:projector_loan/presentation/shared/widget/no_data/no_data_img.dart';
+import 'package:projector_loan/core.dart';
 
 class AdmLoanStatus extends StatelessWidget {
   final String status;
@@ -46,14 +41,13 @@ class AdmLoanStatus extends StatelessWidget {
             itemCount: data.docs.length,
             itemBuilder: (context, index) {
               Map<String, dynamic> item = (data.docs[index].data());
-              item["id"] = data.docs[index].id;
 
               //initialize data
-              String docId = item["id"];
               String studentName = item["student_name"];
               String studentNim = item["student_nim"];
               String studentImg = item["student_profile"];
               String lcdName = item["lcd_name"];
+              String lcdId = item["lcd_id"];
               // DateTime loanAt = item["loan_date"].toDate();
 
               bool requestRefund = item["on_return"];
@@ -70,20 +64,20 @@ class AdmLoanStatus extends StatelessWidget {
                 onAccept: () {
                   if (displayRequestButton && acceptRequest) {
                     controller.acceptRequest(
-                      docId: docId,
+                      lcdId: lcdId,
                       status: 'OnUse',
                     );
                   }
                 },
                 onReject: () {
                   if (displayRequestButton) {
-                    controller.rejectRequest(docId: docId);
+                    controller.rejectRequest(lcdId: lcdId);
                   }
                 },
                 onReturn: () {
                   if (requestRefund) {
                     controller.confirmReturned(
-                      docId: docId,
+                      lcdId: lcdId,
                       status: 'Returned',
                     );
                   }

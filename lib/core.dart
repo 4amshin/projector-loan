@@ -49,7 +49,7 @@ export 'package:projector_loan/presentation/module/student/st_home/widget/st_mid
 export 'package:projector_loan/presentation/module/student/st_home/widget/st_mid_content_card.dart';
 export 'package:projector_loan/presentation/module/student/st_home/widget/st_scanner_button.dart';
 export 'package:projector_loan/presentation/module/student/st_home/widget/st_top_profile.dart';
-export 'package:projector_loan/presentation/module/student/st_home/widget/st_top_profile_loading.dart';
+export 'package:projector_loan/presentation/shared/widget/loading/st_top_profile_loading.dart';
 export 'package:projector_loan/presentation/module/student/st_lcd_detail/controller/st_lcd_detail_controller.dart';
 export 'package:projector_loan/presentation/module/student/st_lcd_detail/view/st_lcd_detail_view.dart';
 export 'package:projector_loan/presentation/module/student/st_lcd_detail/widget/st_borrow_button.dart';
@@ -79,7 +79,7 @@ export 'package:projector_loan/presentation/module/student/st_scanner/widget/st_
 export 'package:projector_loan/presentation/module/student/st_scanner/widget/st_light_on.dart';
 export 'package:projector_loan/presentation/module/student/st_scanner/widget/st_scan_button.dart';
 export 'package:projector_loan/data/services/auth_services/auth_services.dart';
-export 'package:projector_loan/data/services/auth_services/student_data.dart';
+export 'package:projector_loan/data/services/auth_services/student_data_service.dart';
 export 'package:projector_loan/data/services/lcd_services/lcd_service.dart';
 export 'package:projector_loan/data/services/loan_services/loan_service.dart';
 export 'package:projector_loan/presentation/shared/theme/color_theme.dart';

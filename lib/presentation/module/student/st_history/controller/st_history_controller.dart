@@ -23,14 +23,12 @@ class StHistoryController extends State<StHistoryView>
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   doCancelRequest({
-    required String docId,
+    required String lcdId,
   }) async {
     await confirmationDialog(
       message: "Batalkan Request Peminjaman?",
       onYes: () async {
-        await LoanService.deleteLoanData(
-          docId: docId,
-        );
+        await LoanService.deleteLoanData(lcdId: lcdId);
         Get.back();
         log("Request Canceled");
       },
@@ -38,18 +36,18 @@ class StHistoryController extends State<StHistoryView>
   }
 
   doReturnedRequest({
-    required String docId,
+    required String lcdId,
   }) async {
     await confirmationDialog(
       message: "Ajukan Pengembalian LCD?",
       onYes: () async {
         await LoanService.returnRequest(
-          docId: docId,
+          lcdId: lcdId,
           onReturn: true,
         );
         await FirebaseFirestore.instance
             .collection("loan_data")
-            .doc(docId)
+            .doc(lcdId)
             .update({
           "return_date": Timestamp.now(),
         });

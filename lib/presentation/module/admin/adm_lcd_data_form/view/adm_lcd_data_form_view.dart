@@ -4,6 +4,7 @@ import 'package:projector_loan/presentation/module/admin/adm_lcd_data_form/widge
 import 'package:projector_loan/presentation/module/admin/adm_lcd_data_form/widget/adm_save_button.dart';
 import 'package:projector_loan/presentation/shared/util/validator/validator.dart';
 import 'package:projector_loan/presentation/shared/widget/appBar_title/app_bar_title.dart';
+import 'package:projector_loan/presentation/shared/widget/input_field/dropdown.dart';
 import 'package:projector_loan/presentation/shared/widget/input_field/q_text_field.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -57,7 +58,8 @@ class AdmLcdDataFormView extends StatefulWidget {
                 ),
                 QTextField(
                   label: "ID Proyektor",
-                  hint: "Contoh: uncpLcd00",
+                  hint: controller.isEditMode ? null : "Contoh: uncpLcd00",
+                  enabled: controller.isEditMode ? false : true,
                   validator: Validator.required,
                   suffixIcon: Icons.confirmation_num_outlined,
                   value: controller.lcdId,
@@ -66,13 +68,25 @@ class AdmLcdDataFormView extends StatefulWidget {
                   },
                 ),
                 controller.isEditMode
-                    ? QTextField(
+                    ? QDropdownField(
                         label: "Status",
-                        hint: "Contoh: Tersedia / Dipakai / Rusak ",
                         validator: Validator.required,
-                        suffixIcon: Icons.info,
                         value: controller.status,
-                        onChanged: (value) {
+                        items: const [
+                          {
+                            "label": "Tersedia",
+                            "value": "Tersedia",
+                          },
+                          {
+                            "label": "DiPakai",
+                            "value": "Dipakai",
+                          },
+                          {
+                            "label": "Rusak",
+                            "value": "Rusak",
+                          },
+                        ],
+                        onChanged: (value, label) {
                           controller.status = value;
                         },
                       )

@@ -1,11 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import 'package:projector_loan/core.dart';
+import 'package:intl/intl.dart';
 
 class StLoanStatus extends StatelessWidget {
   final String status;
@@ -46,13 +43,12 @@ class StLoanStatus extends StatelessWidget {
             itemCount: data.docs.length,
             itemBuilder: (context, index) {
               Map<String, dynamic> item = (data.docs[index].data());
-              item["id"] = data.docs[index].id;
 
               //initialize data
-              String docId = item["id"];
               // String studentName = item["student_name"];
               // String studentNim = item["student_nim"];
               // String studentImg = item["student_profile"];
+              String lcdId = item["lcd_id"];
               String lcdName = item["lcd_name"];
               DateTime loanDate = item["loan_date"].toDate();
               DateTime returnDate =
@@ -78,9 +74,9 @@ class StLoanStatus extends StatelessWidget {
                 isReturned: status == 'Returned' ? true : false,
                 onTap: () {
                   if (cancelRequest) {
-                    controller.doCancelRequest(docId: docId);
+                    controller.doCancelRequest(lcdId: lcdId);
                   } else if (returnedRequest) {
-                    controller.doReturnedRequest(docId: docId);
+                    controller.doReturnedRequest(lcdId: lcdId);
                   } else {
                     null;
                   }

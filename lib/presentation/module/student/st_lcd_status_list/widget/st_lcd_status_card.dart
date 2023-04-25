@@ -17,7 +17,11 @@ class StLcdStatusCard extends StatelessWidget {
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("data_lcd")
-            .where("status", isEqualTo: status)
+            .where(
+              "status",
+              isEqualTo: status,
+            )
+            .where("status")
             // .orderBy("lcd_name")
             .snapshots(),
         builder: (context, snapshot) {
@@ -64,13 +68,17 @@ class StLcdStatusCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const CircleAvatar(
+                          CircleAvatar(
                             radius: 5,
-                            backgroundColor: Colors.greenAccent,
+                            backgroundColor: status == "Tersedia"
+                                ? Colors.greenAccent
+                                : status == "Dipakai"
+                                    ? Colors.orangeAccent
+                                    : Colors.redAccent,
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            "Tersedia",
+                            status,
                             style: GoogleFonts.openSans(
                               fontSize: 10,
                               color: Colors.black45,

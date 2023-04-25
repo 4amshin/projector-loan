@@ -30,7 +30,7 @@ class StProfileEditFormController extends State<StProfileEditFormView>
   String? nim;
 
   saveStudentData() async {
-    await AuthService.updateStudentData(
+    await StudentData.updateStudentData(
       docId: docId!,
       imgUrl: imgUrl!,
       name: name!,

@@ -82,7 +82,7 @@ class StTopProfile extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "Selamat Bergabumg di Aplikasi Layanan Peminjaman Proyector LCD Kampus",
+                    "Selamat Bergabung di Aplikasi Layanan Peminjaman Proyector LCD Kampus",
                     style: GoogleFonts.openSans(
                       height: 1.2,
                       fontSize: 14,
