@@ -3,6 +3,7 @@ class LoanData {
   final String lcdId;
   final String lcdName;
   final DateTime loanDate;
+  final DateTime returnDate;
   final bool onReturn;
   final String status;
   final String studentEmail;
@@ -13,6 +14,7 @@ class LoanData {
     required this.lcdId,
     required this.lcdName,
     required this.loanDate,
+    required this.returnDate,
     required this.onReturn,
     required this.status,
     required this.studentEmail,
@@ -26,6 +28,7 @@ class LoanData {
       lcdId: map['lcd_id'] ?? '',
       lcdName: map['lcd_name'] ?? '',
       loanDate: map['loan_date'].toDate() ?? '',
+      returnDate: map['loan_date'].toDate() ?? DateTime.now(),
       onReturn: map['on_return'] ?? '',
       status: map['status'] ?? '',
       studentEmail: map['student_email'] ?? '',

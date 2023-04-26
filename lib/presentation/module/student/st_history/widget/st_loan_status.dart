@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:projector_loan/core.dart';
 import 'package:intl/intl.dart';
+import 'package:projector_loan/presentation/shared/util/date_format/date_format_util.dart';
 
 class StLoanStatus extends StatelessWidget {
   final String status;
@@ -42,41 +43,21 @@ class StLoanStatus extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: data.docs.length,
             itemBuilder: (context, index) {
-              Map<String, dynamic> item = (data.docs[index].data());
-
-              //initialize data
-              // String studentName = item["student_name"];
-              // String studentNim = item["student_nim"];
-              // String studentImg = item["student_profile"];
-              String lcdId = item["lcd_id"];
-              String lcdName = item["lcd_name"];
-              DateTime loanDate = item["loan_date"].toDate();
-              DateTime returnDate =
-                  item["return_date"]?.toDate() ?? DateTime.now();
-
-              //initialize day and hour time
-              //day format
-              DateFormat dateFormat = DateFormat('EEEE, d MMMM y', 'id_ID');
-              //hour format
-              DateFormat timeFormat = DateFormat('hh:mm a');
-              // format the date and time strings
-              String dayTime = dateFormat.format(loanDate);
-              String loanHour = timeFormat.format(loanDate);
-              String hourReturned = timeFormat.format(returnDate);
+              final item = LoanData.fromFirebase(data.docs[index].data());
 
               return StLoanStatusCard(
-                lcdName: lcdName,
-                dayTime: dayTime,
-                loanHour: loanHour,
-                returnHour: hourReturned,
+                lcdName: item.lcdName,
+                dayTime: TimeUtil.formatDayTime(item.loanDate),
+                loanHour: TimeUtil.formatHourTime(item.loanDate),
+                returnHour: TimeUtil.formatHourTime(item.returnDate),
                 cancelRequest: cancelRequest,
                 returnedRequest: returnedRequest,
                 isReturned: status == 'Returned' ? true : false,
                 onTap: () {
                   if (cancelRequest) {
-                    controller.doCancelRequest(lcdId: lcdId);
+                    controller.doCancelRequest(lcdId: item.lcdId);
                   } else if (returnedRequest) {
-                    controller.doReturnedRequest(lcdId: lcdId);
+                    controller.doReturnedRequest(lcdId: item.lcdId);
                   } else {
                     null;
                   }
