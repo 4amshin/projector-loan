@@ -2,12 +2,12 @@
 - apply to the ['']
 - apply to them all
 
-- make function inside model for service
+- make function inside model for service (createUserData, createLcdData, etc)
 
-- make login ui for admin
-- admin auth doesnt used email or google
-- manual username and pass
+- Current Admin login system is temporary
+- Future System is:
+    - username and password data stored in firebase collection("admin")
+    - Login by matching if inputted username and password exist in firebase collection("admin")
 
-- idea for login 
-- uncp logo in the corner
-- double tap for opening admin login ui
+
+- Made Admin Dashboard UI

@@ -20,7 +20,12 @@ class AdmDashboardController extends State<AdmDashboardView>
   Widget build(BuildContext context) => widget.build(context, this);
 
   doAdminLogout() {
-    log("Admin Exit");
-    Get.offAll(const LoginView());
+    confirmationDialog(
+      message: 'Kamu yakin ingin Logout?',
+      onYes: () {
+        log("Admin Exit");
+        Get.offAll(const LoginView());
+      },
+    );
   }
 }

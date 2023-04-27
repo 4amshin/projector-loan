@@ -23,17 +23,17 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.openSansTextTheme(),
         useMaterial3: true,
       ),
-      // home: const AdmMainNavigationView(),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const EmailVerificationView();
-          } else {
-            return const LoginView();
-          }
-        },
-      ),
+      home: const AdmMainNavigationView(),
+      // home: StreamBuilder<User?>(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasData) {
+      //       return const EmailVerificationView();
+      //     } else {
+      //       return const LoginView();
+      //     }
+      //   },
+      // ),
     );
   }
 }
