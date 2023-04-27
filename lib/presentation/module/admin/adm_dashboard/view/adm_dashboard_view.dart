@@ -9,6 +9,12 @@ class AdmDashboardView extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(title: 'Admin Dashboard'),
+        actions: [
+          IconButton(
+            onPressed: () => controller.doAdminLogout(),
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 20),

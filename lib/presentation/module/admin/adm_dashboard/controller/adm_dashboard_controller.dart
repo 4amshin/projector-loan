@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:projector_loan/state_util.dart';
-import '../view/adm_dashboard_view.dart';
+import 'dart:developer';
+
+import 'package:projector_loan/core.dart';
 
 class AdmDashboardController extends State<AdmDashboardView>
     implements MvcController {
@@ -18,4 +18,9 @@ class AdmDashboardController extends State<AdmDashboardView>
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  doAdminLogout() {
+    log("Admin Exit");
+    Get.offAll(const LoginView());
+  }
 }

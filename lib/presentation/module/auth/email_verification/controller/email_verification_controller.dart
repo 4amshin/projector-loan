@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 
 class EmailVerificationController extends State<EmailVerificationView>

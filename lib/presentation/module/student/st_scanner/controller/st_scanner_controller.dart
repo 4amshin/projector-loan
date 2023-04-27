@@ -58,10 +58,7 @@ class StScannerController extends State<StScannerView>
   void scanQrCode() {
     log("Scanning......");
     //navigate to LCD detail page for loan operation
-    Get.offAll(StLcdDetailView(scannedData: scannedData!));
-    // Get.to(
-    //   StLcdDetailView(scannedData: scannedData!),
-    // );
+    Get.to(StLcdDetailView(scannedData: scannedData!));
   }
 
   //ask camera permission
