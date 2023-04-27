@@ -36,6 +36,7 @@ class AuthService {
 
   static Future<void> signInWithEmail(
     BuildContext context, {
+    required bool isAdmin,
     required String email,
     required String password,
   }) async {
@@ -45,17 +46,27 @@ class AuthService {
         email: email,
         password: password,
       );
-      if (userCredential.user != null &&
-          userCredential.user!.emailVerified == true) {
-        log("Navigate to Student Dashboard");
-        Get.offAll(const StMainNavigationView());
-      } else {
-        ShowSnackBar.show(context, message: "Email belum diverifikasi");
-        if (userCredential.user != null) {
-          await userCredential.user?.sendEmailVerification();
-          log("Sending Email Verification");
+
+      //admin doesn't need email verified
+      if (isAdmin) {
+        log("Navigate to Admin Dashboard");
+        Get.offAll(const AdmMainNavigationView());
+      }
+
+      //while other than admin need email verified
+      if (!isAdmin) {
+        if (userCredential.user != null &&
+            userCredential.user!.emailVerified == true) {
+          log("Navigate to Student Dashboard");
+          Get.offAll(const StMainNavigationView());
+        } else {
+          ShowSnackBar.show(context, message: "Email belum diverifikasi");
+          if (userCredential.user != null) {
+            await userCredential.user?.sendEmailVerification();
+            log("Sending Email Verification");
+          }
+          ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
         }
-        ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
       }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {

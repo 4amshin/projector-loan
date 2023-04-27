@@ -1,11 +1,13 @@
 import 'dart:developer';
 
-import 'package:projector_loan/core.dart';
 import 'package:projector_loan/presentation/module/auth/admin_login/view/admin_login_view.dart';
 
-class LoginController extends State<LoginView> implements MvcController {
-  static late LoginController instance;
-  late LoginView view;
+import 'package:projector_loan/core.dart';
+
+class AdminLoginController extends State<AdminLoginView>
+    implements MvcController {
+  static late AdminLoginController instance;
+  late AdminLoginView view;
 
   @override
   void initState() {
@@ -28,25 +30,12 @@ class LoginController extends State<LoginView> implements MvcController {
   String? password;
 
   // execute login operation
-  doLoginWithEmail() {
+  doAdminLogin() {
     AuthService.signInWithEmail(
       context,
-      isAdmin: false,
+      isAdmin: true,
       email: email!,
       password: password!,
     );
-  }
-
-  toRegisterView() {
-    Get.offAll(const RegisterView());
-  }
-
-  toAdminLoginPage() {
-    Get.to(const AdminLoginView());
-  }
-
-  forgetPasswordView() {
-    log("Navigate to Forget Password Page");
-    Get.to(const ForgotPasswordView());
   }
 }

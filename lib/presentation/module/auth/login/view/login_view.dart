@@ -13,13 +13,19 @@ class LoginView extends StatefulWidget {
           vertical: 15,
         ),
         child: Column(
-          children: const [
+          children: [
             Expanded(
               flex: 1,
-              child: SizedBox(),
+              child: InkWell(
+                onDoubleTap: () => controller.toAdminLoginPage(),
+                child: SvgPicture.asset(
+                  'assets/icons/uncp-color.svg',
+                  height: 80,
+                ),
+              ),
             ),
-            AtLoginContent(),
-            Expanded(
+            const AtLoginContent(),
+            const Expanded(
               flex: 1,
               child: SizedBox(),
             ),

@@ -6,7 +6,7 @@ it means you have to rename it to something more unique.
 export 'package:projector_loan/data/model/loan_term_model.dart';
 export 'package:projector_loan/presentation/module/admin/adm_dashboard/controller/adm_dashboard_controller.dart';
 export 'package:projector_loan/presentation/module/admin/adm_dashboard/view/adm_dashboard_view.dart';
-export 'package:projector_loan/presentation/module/admin/adm_lcd_data/controller/adm_lcd_data_controller.dart';
+
 export 'package:projector_loan/presentation/module/admin/adm_lcd_data/view/adm_lcd_data_view.dart';
 export 'package:projector_loan/presentation/module/admin/adm_lcd_data/widget/adm_add_button.dart';
 export 'package:projector_loan/presentation/module/admin/adm_lcd_data/widget/adm_lcd_card.dart';

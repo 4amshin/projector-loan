@@ -1,4 +1,5 @@
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/presentation/module/admin/adm_lcd_data/controller/adm_lcd_data_controller.dart';
 
 class AdmLcdDataView extends StatefulWidget {
   const AdmLcdDataView({Key? key}) : super(key: key);

@@ -1,0 +1,13 @@
+- make data class model
+- apply to the ['']
+- apply to them all
+
+- make function inside model for service
+
+- make login ui for admin
+- admin auth doesnt used email or google
+- manual username and pass
+
+- idea for login 
+- uncp logo in the corner
+- double tap for opening admin login ui
