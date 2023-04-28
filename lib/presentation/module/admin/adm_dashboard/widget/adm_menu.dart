@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projector_loan/core.dart';
 
 class AdmMenu extends StatelessWidget {
   const AdmMenu({Key? key}) : super(key: key);
@@ -33,13 +34,10 @@ class AdmMenu extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Center(
-                  child: Text(
-                    "IMG",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Center(
+                  child: SvgPicture.network(
+                    'https://bit.ly/3Lgi1Xn',
+                    height: 60,
                   ),
                 ),
                 Column(

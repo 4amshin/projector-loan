@@ -37,4 +37,14 @@ Main Navigation
 	- Proyektor Invetory Summary
 		- display the total available, Borrowed, and broken
 
+
+Icon Link
+==================
+inventory : https://cutt.ly/25TJPab
+returned : https://bit.ly/3Lgi1Xn
+lcd-box : https://cutt.ly/s5TJSsk
+lcd-flat: https://cutt.ly/75TJGan
+pending : https://bit.ly/3HkSZoR
+
+profile img : https://bit.ly/40Q90Ku
 	

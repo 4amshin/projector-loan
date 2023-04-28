@@ -19,6 +19,8 @@ class AdmDashboardController extends State<AdmDashboardView>
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
   doAdminLogout() {
     confirmationDialog(
       message: 'Kamu yakin ingin Logout?',

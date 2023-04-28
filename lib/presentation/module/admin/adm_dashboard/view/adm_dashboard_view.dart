@@ -1,5 +1,4 @@
 import 'package:projector_loan/core.dart';
-import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_home_loading.dart';
 import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_menu.dart';
 import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_profile.dart';
 
