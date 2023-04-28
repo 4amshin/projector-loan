@@ -1,16 +1,17 @@
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/presentation/shared/widget/loading/build_shimmer.dart';
 
 class StTopProfileLoading extends StatelessWidget {
   const StTopProfileLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final circleAvatar = _buildShimmer(
-      const CircleAvatar(radius: 20),
+    final circleAvatar = buildShimmer(
+      child: const CircleAvatar(radius: 20),
     );
 
-    final smallBox = _buildShimmer(
-      Container(
+    final smallBox = buildShimmer(
+      child: Container(
         height: 45,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
@@ -20,8 +21,8 @@ class StTopProfileLoading extends StatelessWidget {
       ),
     );
 
-    final largeBox = _buildShimmer(
-      Container(
+    final largeBox = buildShimmer(
+      child: Container(
         height: 23,
         width: MediaQuery.of(context).size.width * 0.7,
         decoration: BoxDecoration(
@@ -55,14 +56,6 @@ class StTopProfileLoading extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildShimmer(Widget child) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: child,
     );
   }
 }
