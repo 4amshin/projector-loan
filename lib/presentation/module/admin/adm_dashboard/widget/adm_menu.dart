@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
+import 'package:projector_loan/data/model/admin_home_category_model.dart';
+import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_menu_card.dart';
+import 'package:projector_loan/presentation/shared/widget/loading/adm_home_category_loading.dart';
 
 class AdmMenu extends StatelessWidget {
   const AdmMenu({Key? key}) : super(key: key);
@@ -7,63 +9,37 @@ class AdmMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GridView.builder(
-        padding: const EdgeInsets.only(top: 10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          childAspectRatio: 0.8,
-        ),
-        itemCount: 4,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Item $index",
-                  style: const TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Center(
-                  child: SvgPicture.network(
-                    'https://bit.ly/3Lgi1Xn',
-                    height: 60,
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "500",
-                      style: TextStyle(
-                        height: 1,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "Total Request",
-                      style: TextStyle(
-                        height: 1,
-                        fontSize: 12.0,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+      child: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('admin_home_category')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const AdmHomeCategoryLoading();
+          } else if (!snapshot.hasData) {
+            return const NoDataImg();
+          } else {
+            final data = snapshot.data!;
+
+            return GridView.builder(
+              padding: const EdgeInsets.only(top: 10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                childAspectRatio: 0.8,
+              ),
+              itemCount: data.docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = AdminHomeCategory.fromFirestore(data.docs[index]);
+                return AdmMenuCard(
+                  title: item.title,
+                  icon: item.icon,
+                  total: item.total,
+                );
+              },
+            );
+          }
         },
       ),
     );
