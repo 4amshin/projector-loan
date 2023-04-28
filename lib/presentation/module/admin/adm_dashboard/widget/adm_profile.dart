@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:projector_loan/core.dart';
 import 'package:projector_loan/data/model/admin_data_model.dart';
-import 'package:projector_loan/presentation/module/admin/adm_dashboard/controller/adm_dashboard_controller.dart';
 import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_profile_card.dart';
+import 'package:projector_loan/presentation/shared/widget/loading/adm_profile_card_loading.dart';
 
 class AdmProfile extends StatelessWidget {
   const AdmProfile({Key? key}) : super(key: key);
@@ -15,7 +13,7 @@ class AdmProfile extends StatelessWidget {
       height: 130.0,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.4),
+        color: Colors.indigo.withOpacity(0.3),
         borderRadius: BorderRadius.circular(25),
       ),
       child: StreamBuilder(
@@ -25,7 +23,7 @@ class AdmProfile extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const AdmProfileCardLoading();
           } else if (!snapshot.hasData) {
             return Center(
               child: Text(

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projector_loan/core.dart';
 
 class AdmProfileCard extends StatelessWidget {
   final String imgUrl;
@@ -19,9 +20,10 @@ class AdmProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundImage: NetworkImage(imgUrl),
+        WdCachedImage(
+          imgUrl: imgUrl,
+          borderRadius: 40,
+          size: 80,
         ),
         const SizedBox(width: 10),
         Column(
@@ -41,15 +43,16 @@ class AdmProfileCard extends StatelessWidget {
               job,
               style: GoogleFonts.openSans(
                 fontSize: 14,
-                color: Colors.grey,
-                fontWeight: FontWeight.w400,
+                color: Colors.black54,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Text(
               nip,
               style: GoogleFonts.openSans(
                 fontSize: 14,
-                color: Colors.grey,
+                color: Colors.black38,
                 fontWeight: FontWeight.w400,
               ),
             ),
