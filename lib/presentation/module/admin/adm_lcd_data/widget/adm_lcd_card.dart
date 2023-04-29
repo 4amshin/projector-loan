@@ -47,12 +47,12 @@ class AdmLcdCard extends StatelessWidget {
             Row(
               children: [
                 SvgPicture.asset(
-                  'assets/icons/projector.svg',
-                  height: 40,
-                  colorFilter: ColorFilter.mode(
-                    Colors.indigoAccent[100]!,
-                    BlendMode.srcIn,
-                  ),
+                  'assets/icons/lcd.svg',
+                  height: 35,
+                  // colorFilter: ColorFilter.mode(
+                  //   Colors.indigoAccent[100]!,
+                  //   BlendMode.srcIn,
+                  // ),
                 ),
                 const SizedBox(
                   width: 20,

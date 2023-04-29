@@ -10,6 +10,17 @@
     - Login by matching if inputted username and password exist in firebase collection("admin")
 
 
+- Display the number of total request in Admin category menu, by iterate and count the loan_data
+- Display total Loan made in this week by counting the loan_data date(this week) the done order
+
+
+
+
+
+
+
+
+
 - Made Admin Dashboard UI
 
 Admin UI

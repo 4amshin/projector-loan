@@ -47,8 +47,9 @@ class StLoanStatusCard extends StatelessWidget {
           Row(
             children: [
               SvgPicture.asset(
-                'assets/icons/lcd.svg',
-                height: 40,
+                'assets/icons/lcd-flat.svg',
+                // height: 40,
+                width: 70,
               ),
               const SizedBox(width: 15),
               Expanded(

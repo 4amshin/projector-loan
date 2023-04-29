@@ -90,8 +90,8 @@ class StLcdStatusCard extends StatelessWidget {
                       Column(
                         children: [
                           SvgPicture.asset(
-                            'assets/icons/lcd.svg',
-                            height: 55,
+                            'assets/icons/lcd-box.svg',
+                            height: 65,
                           ),
                           const SizedBox(height: 15),
                           Text(
