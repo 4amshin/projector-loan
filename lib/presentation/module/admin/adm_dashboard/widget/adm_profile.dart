@@ -13,7 +13,15 @@ class AdmProfile extends StatelessWidget {
       height: 130.0,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
       decoration: BoxDecoration(
-        color: Colors.indigo.withOpacity(0.3),
+        // color: Colors.indigo.withOpacity(0.3),
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xfff5cc38),
+            Color(0xfff4ea6f),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
         borderRadius: BorderRadius.circular(25),
       ),
       child: StreamBuilder(

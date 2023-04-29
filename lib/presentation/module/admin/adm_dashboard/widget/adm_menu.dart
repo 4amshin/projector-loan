@@ -30,12 +30,14 @@ class AdmMenu extends StatelessWidget {
                 childAspectRatio: 0.8,
               ),
               itemCount: data.docs.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 final item = AdminHomeCategory.fromFirestore(data.docs[index]);
                 return AdmMenuCard(
                   title: item.title,
                   icon: item.icon,
                   total: item.total,
+                  color1: item.color1,
+                  color2: item.color2,
                 );
               },
             );
