@@ -79,7 +79,7 @@ export 'package:projector_loan/presentation/module/student/st_scanner/widget/st_
 export 'package:projector_loan/presentation/module/student/st_scanner/widget/st_light_on.dart';
 export 'package:projector_loan/presentation/module/student/st_scanner/widget/st_scan_button.dart';
 export 'package:projector_loan/data/services/auth_services/auth_services.dart';
-export 'package:projector_loan/data/services/auth_services/student_data_service.dart';
+export 'package:projector_loan/data/services/student_service/student_data_service.dart';
 export 'package:projector_loan/data/services/lcd_services/lcd_service.dart';
 export 'package:projector_loan/data/services/loan_services/loan_service.dart';
 export 'package:projector_loan/presentation/shared/theme/color_theme.dart';

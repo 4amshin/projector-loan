@@ -15,6 +15,12 @@ class AuthService {
         password: password,
       );
 
+      //add student role data
+      await FirebaseFirestore.instance.collection("user_role").add({
+        "email": email,
+        "role": "student",
+      });
+
       //send email verification
       await FirebaseAuth.instance.currentUser!.sendEmailVerification();
       ShowSnackBar.show(context, message: "Mengirim Link Verifikasi");
@@ -41,11 +47,22 @@ class AuthService {
     required String password,
   }) async {
     try {
+      //show loading
+      showDialog(
+        context: context,
+        builder: (_) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+
       final userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      //dismiss the loading
+      Get.back();
 
       //admin doesn't need email verified
       if (isAdmin) {
@@ -69,6 +86,9 @@ class AuthService {
         }
       }
     } on FirebaseAuthException catch (e) {
+      //dismiss the loading
+      Get.back();
+
       switch (e.code) {
         case 'user-not-found':
           ShowSnackBar.show(context, message: "Pengguna tidak ditemukan");
@@ -85,6 +105,39 @@ class AuthService {
         default:
           log("Error during login: $e");
           ShowSnackBar.show(context, message: "Terjadi kesalahan saat login");
+      }
+    }
+  }
+
+  static Future<bool> adminLogin(
+    BuildContext context, {
+    required String username,
+    required String password,
+  }) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('admin_auth_data')
+        .where('username', isEqualTo: username)
+        .get();
+
+    if (snapshot.docs.isEmpty) {
+      ShowSnackBar.show(context, message: "Pengguna tidak ditemukan");
+
+      log('Pengguna tidak ditemukan');
+      return false;
+    } else {
+      final doc = snapshot.docs.first;
+      if (doc['password'] == password) {
+        ShowSnackBar.show(context, message: "Login Berhasil");
+
+        log('Login Berhasil');
+        log('Navigate to Admin Dashboard');
+        Get.offAll(const AdmDashboardView());
+        return true;
+      } else {
+        ShowSnackBar.show(context, message: "Password anda salah!");
+
+        log('Password anda salah');
+        return false;
       }
     }
   }

@@ -21,6 +21,21 @@ class AdmDashboardController extends State<AdmDashboardView>
 
   final currentUser = FirebaseAuth.instance.currentUser!;
 
+  //get admin data stream
+  Stream<QuerySnapshot<Map<String, dynamic>>> adminDataStream() {
+    return FirebaseFirestore.instance
+        .collection('admin_data')
+        .where('email', isEqualTo: currentUser.email)
+        .snapshots();
+  }
+
+  //get admin home category data stream
+  Stream<QuerySnapshot<Map<String, dynamic>>> adminHomeCategoryStream() {
+    return FirebaseFirestore.instance
+        .collection('admin_home_category')
+        .snapshots();
+  }
+
   doAdminLogout() {
     confirmationDialog(
       message: 'Kamu yakin ingin Logout?',

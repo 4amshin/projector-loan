@@ -1,6 +1,7 @@
 import 'package:projector_loan/core.dart';
 import 'package:projector_loan/data/model/admin_data_model.dart';
 import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_profile_card.dart';
+import 'package:projector_loan/presentation/module/admin/adm_dashboard/widget/adm_profile_error_text.dart';
 import 'package:projector_loan/presentation/shared/widget/loading/adm_profile_card_loading.dart';
 
 class AdmProfile extends StatelessWidget {
@@ -25,23 +26,12 @@ class AdmProfile extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('admin_data')
-            .where('email', isEqualTo: controller.currentUser.email)
-            .snapshots(),
+        stream: controller.adminDataStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const AdmProfileCardLoading();
           } else if (!snapshot.hasData) {
-            return Center(
-              child: Text(
-                "Failed Load Data",
-                style: GoogleFonts.openSans(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
+            return const AdmProfileErrorText();
           } else {
             final data = AdminData.fromFirestore(snapshot.data!.docs[0]);
 

@@ -30,12 +30,18 @@ class AdminLoginController extends State<AdminLoginView>
   String? password;
 
   // execute login operation
-  doAdminLogin() {
+  doAdminLogin() async {
     AuthService.signInWithEmail(
       context,
       isAdmin: true,
       email: email!,
       password: password!,
     );
+
+    // await AuthService.adminLogin(
+    //   context,
+    //   username: username!,
+    //   password: password!,
+    // );
   }
 }

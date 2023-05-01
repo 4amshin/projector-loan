@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:projector_loan/core.dart';
 
@@ -8,6 +10,10 @@ class EmailVerificationView extends StatefulWidget {
     controller.view = this;
 
     if (controller.isEmailVerified) {
+      if (controller.isAdmin) {
+        log("User is Admin");
+        return const AdmMainNavigationView();
+      }
       return const StMainNavigationView();
     } else {
       return const AtEmailVerify();

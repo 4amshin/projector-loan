@@ -8,11 +8,11 @@ class AdmMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AdmDashboardController controller = AdmDashboardController.instance;
+
     return Expanded(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('admin_home_category')
-            .snapshots(),
+        stream: controller.adminHomeCategoryStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const AdmHomeCategoryLoading();

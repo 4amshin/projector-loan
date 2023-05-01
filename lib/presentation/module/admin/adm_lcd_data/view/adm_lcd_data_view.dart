@@ -17,10 +17,7 @@ class AdmLcdDataView extends StatefulWidget {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("data_lcd")
-            .orderBy('lcd_name')
-            .snapshots(),
+        stream: controller.dataLcdStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

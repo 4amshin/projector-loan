@@ -4,49 +4,8 @@
 
 - make function inside model for service (createUserData, createLcdData, etc)
 
-- Current Admin login system is temporary
-- Future System is:
-    - username and password data stored in firebase collection("admin")
-    - Login by matching if inputted username and password exist in firebase collection("admin")
-
-
 - Display the number of total request in Admin category menu, by iterate and count the loan_data
 - Display total Loan made in this week by counting the loan_data date(this week) the done order
-
-
-
-
-
-
-
-
-
-- Made Admin Dashboard UI
-
-Admin UI
-=============
-Main Navigation
-- Home
-- Status Peminjaman
-- Daftar LCD
-
-- Home / Dashboard
- 1) Admin Profile
-  - Admin Name
-  - Admin NIP
-  - Admin Profile Img
-
- 2) LogOut Button
- 
- 3) Container
-	- Loan Requeust Summary 
-		- display total pending loan request
-		- display total returned request
-
-	- total Loan in this week
-
-	- Proyektor Invetory Summary
-		- display the total available, Borrowed, and broken
 
 
 Icon Link

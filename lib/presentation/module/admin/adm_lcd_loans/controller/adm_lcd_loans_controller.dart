@@ -19,6 +19,14 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
+  // loan data stream
+  Stream loanDataStream({required String status}) {
+    return FirebaseFirestore.instance
+        .collection('loan_data')
+        .where("status", isEqualTo: status)
+        .snapshots();
+  }
+
   acceptRequest({
     required String lcdId,
     required String status,

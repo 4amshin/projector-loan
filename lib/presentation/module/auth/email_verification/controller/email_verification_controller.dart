@@ -10,6 +10,7 @@ class EmailVerificationController extends State<EmailVerificationView>
 
   bool isEmailVerified = false;
   Timer? timer;
+  bool isAdmin = false;
 
   @override
   void initState() {
@@ -38,6 +39,20 @@ class EmailVerificationController extends State<EmailVerificationView>
         (_) => _checkEmailVerified(),
       );
     }
+
+    // check if the current user is admin
+    FirebaseFirestore.instance
+        .collection('user_role')
+        .where('email', isEqualTo: currentUser.email)
+        .where('role', isEqualTo: 'admin')
+        .get()
+        .then((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          isAdmin = true;
+        });
+      }
+    });
     super.initState();
   }
 
@@ -80,4 +95,6 @@ class EmailVerificationController extends State<EmailVerificationView>
   toLoginView() {
     Get.offAll(const LoginView());
   }
+
+  final currentUser = FirebaseAuth.instance.currentUser!;
 }
