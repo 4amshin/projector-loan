@@ -8,28 +8,25 @@ class StProfileStream extends StatelessWidget {
     final StProfileController controller = StProfileController.instance;
 
     return StreamBuilder<Student>(
-      stream: FirebaseFirestore.instance
-          .collection('students')
-          .where("email", isEqualTo: controller.currentUser.email)
-          .snapshots()
-          .map((snapshot) => Student.fromFirestore(snapshot.docs.first)),
+      stream: controller.studentsStream(),
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        }
-
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const StProfileViewLoading();
+        } else if (snapshot.hasError) {
+          return Center(
+              child: Text('Something went wrong:\n${snapshot.error}'));
+        } else if (!snapshot.hasData) {
+          return const Center(child: Text('No Data'));
+        } else {
+          final student = snapshot.data!;
+
+          return StProfileImage(
+            imgUrl: student.imgUrl,
+            name: student.name,
+            nim: student.nim,
+            onEdit: () => controller.toEditProfile(student: student),
+          );
         }
-
-        final student = snapshot.data!;
-
-        return StProfileImage(
-          imgUrl: student.imgUrl,
-          name: student.name,
-          nim: student.nim,
-          onEdit: () => controller.toEditProfile(student: student),
-        );
       },
     );
   }

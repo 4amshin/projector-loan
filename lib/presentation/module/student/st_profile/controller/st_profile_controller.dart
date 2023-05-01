@@ -21,6 +21,15 @@ class StProfileController extends State<StProfileView>
 
   final currentUser = FirebaseAuth.instance.currentUser!;
 
+  //students stream
+  Stream<Student> studentsStream() {
+    return FirebaseFirestore.instance
+        .collection('students')
+        .where("email", isEqualTo: currentUser.email)
+        .snapshots()
+        .map((snapshot) => Student.fromFirestore(snapshot.docs.first));
+  }
+
   doLogOut() {
     confirmationDialog(
       message: 'Kamu yakin ingin Logout?',

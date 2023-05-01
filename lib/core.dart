@@ -106,7 +106,7 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:projector_loan/firebase_options.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:projector_loan/data/model/student_model.dart';
-export 'package:projector_loan/presentation/module/student/st_lcd_status_list/widget/st_lcd_status_card.dart';
+export 'package:projector_loan/presentation/module/student/st_lcd_status_list/widget/st_lcd_status.dart';
 export 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 export 'package:qr_code_scanner/qr_code_scanner.dart';
 export 'package:uuid/uuid.dart';

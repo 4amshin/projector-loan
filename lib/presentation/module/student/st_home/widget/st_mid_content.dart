@@ -6,6 +6,7 @@ class StMidContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StHomeController controller = StHomeController.instance;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -22,8 +23,7 @@ class StMidContent extends StatelessWidget {
         SizedBox(
           height: 330,
           child: StreamBuilder(
-            stream:
-                FirebaseFirestore.instance.collection("loan_term").snapshots(),
+            stream: controller.loanTermStream(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return ListView.builder(
@@ -34,34 +34,36 @@ class StMidContent extends StatelessWidget {
                     return const StMidContentCardLoading();
                   },
                 );
-              }
-
-              if (snapshot.hasError) {
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error: ${snapshot.error}"),
+                );
+              } else if (!snapshot.hasData) {
                 return const Center(
-                  child: Text("Error"),
+                  child: Text("No Data"),
+                );
+              } else {
+                final loanTerms = snapshot.data!.docs
+                    .map((doc) => LoanTerm.fromFirestore(doc))
+                    .toList();
+
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: loanTerms.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    final loanTerm = loanTerms[index];
+
+                    return StMidContentCard(
+                      title: loanTerm.title,
+                      color: Color(int.parse("0xff${loanTerm.color}")),
+                      onTap: () async {
+                        showBigInfo(loanTerm: loanTerm);
+                      },
+                    );
+                  },
                 );
               }
-
-              final loanTerms = snapshot.data!.docs
-                  .map((doc) => LoanTerm.fromFirestore(doc))
-                  .toList();
-
-              return ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: loanTerms.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final loanTerm = loanTerms[index];
-
-                  return StMidContentCard(
-                    title: loanTerm.title,
-                    color: Color(int.parse("0xff${loanTerm.color}")),
-                    onTap: () async {
-                      showBigInfo(loanTerm: loanTerm);
-                    },
-                  );
-                },
-              );
             },
           ),
         ),

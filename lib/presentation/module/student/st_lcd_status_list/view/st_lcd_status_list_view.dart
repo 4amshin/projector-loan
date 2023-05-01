@@ -51,13 +51,13 @@ class StLcdStatusListView extends StatefulWidget {
         ),
         body: const TabBarView(
           children: [
-            StLcdStatusCard(
+            StLcdStatus(
               status: "Tersedia",
             ),
-            StLcdStatusCard(
+            StLcdStatus(
               status: "Dipakai",
             ),
-            StLcdStatusCard(
+            StLcdStatus(
               status: "Rusak",
             ),
           ],

@@ -22,6 +22,15 @@ class StHistoryController extends State<StHistoryView>
 
   final currentUser = FirebaseAuth.instance.currentUser!;
 
+  //loan data stream
+  Stream loanDataStream({required String status}) {
+    return FirebaseFirestore.instance
+        .collection('loan_data')
+        .where("status", isEqualTo: status)
+        .where("student_email", isEqualTo: currentUser.email)
+        .snapshots();
+  }
+
   doCancelRequest({
     required String lcdId,
   }) async {

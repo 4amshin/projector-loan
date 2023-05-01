@@ -20,6 +20,20 @@ class StHomeController extends State<StHomeView> implements MvcController {
 
   final currentUser = FirebaseAuth.instance.currentUser!;
 
+  //students stream
+  Stream<Student> studentsStream() {
+    return FirebaseFirestore.instance
+        .collection('students')
+        .where("email", isEqualTo: currentUser.email)
+        .snapshots()
+        .map((snapshot) => Student.fromFirestore(snapshot.docs.first));
+  }
+
+  //loan term stream
+  Stream loanTermStream() {
+    return FirebaseFirestore.instance.collection("loan_term").snapshots();
+  }
+
   scanQrCode() {
     Get.to(const StScannerView());
   }

@@ -22,49 +22,45 @@ class StLoanStatus extends StatelessWidget {
     return SafeArea(
       minimum: const EdgeInsets.all(15),
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('loan_data')
-            .where("status", isEqualTo: status)
-            .where("student_email", isEqualTo: controller.currentUser.email)
-            .snapshots(),
+        stream: controller.loanDataStream(status: status),
         builder: (context, snapshot) {
-          if (snapshot.hasError) return const Center(child: Text("Error"));
-          if (snapshot.data == null) {
-            return const Center(child: Text("Data Null"));
-          }
-          if (snapshot.data!.docs.isEmpty) {
-            log("No Data");
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            log("No Data Found");
             return const NoDataImg();
+          } else {
+            final data = snapshot.data!;
+
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: data.docs.length,
+              itemBuilder: (context, index) {
+                final item = LoanData.fromFirebase(data.docs[index].data());
+
+                return StLoanStatusCard(
+                  lcdName: item.lcdName,
+                  dayTime: TimeUtil.formatDayTime(item.loanDate),
+                  loanHour: TimeUtil.formatHourTime(item.loanDate),
+                  returnHour: TimeUtil.formatHourTime(item.returnDate),
+                  cancelRequest: cancelRequest,
+                  returnedRequest: returnedRequest,
+                  isReturned: status == 'Returned' ? true : false,
+                  onTap: () {
+                    if (cancelRequest) {
+                      controller.doCancelRequest(lcdId: item.lcdId);
+                    } else if (returnedRequest) {
+                      controller.doReturnedRequest(lcdId: item.lcdId);
+                    } else {
+                      null;
+                    }
+                  },
+                );
+              },
+            );
           }
-
-          final data = snapshot.data!;
-
-          return ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: data.docs.length,
-            itemBuilder: (context, index) {
-              final item = LoanData.fromFirebase(data.docs[index].data());
-
-              return StLoanStatusCard(
-                lcdName: item.lcdName,
-                dayTime: TimeUtil.formatDayTime(item.loanDate),
-                loanHour: TimeUtil.formatHourTime(item.loanDate),
-                returnHour: TimeUtil.formatHourTime(item.returnDate),
-                cancelRequest: cancelRequest,
-                returnedRequest: returnedRequest,
-                isReturned: status == 'Returned' ? true : false,
-                onTap: () {
-                  if (cancelRequest) {
-                    controller.doCancelRequest(lcdId: item.lcdId);
-                  } else if (returnedRequest) {
-                    controller.doReturnedRequest(lcdId: item.lcdId);
-                  } else {
-                    null;
-                  }
-                },
-              );
-            },
-          );
         },
       ),
     );

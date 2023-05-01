@@ -31,22 +31,22 @@ class StLcdDetailView extends StatefulWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (!snapshot.hasData) {
               return const Center(child: Text('No data available'));
+            } else {
+              final doc = snapshot.data!.docs.first;
+              final lcdName = doc['lcd_name'] as String?;
+              final lcdBrand = doc['brand'] as String?;
+              final resolution = doc['resolution'] as String?;
+              final weight = doc['weight'] as String?;
+              final port = doc['port'] as String?;
+
+              return StLcdDetailCard(
+                lcdName: lcdName!,
+                brand: lcdBrand!,
+                resolution: resolution!,
+                weight: weight!,
+                port: port!,
+              );
             }
-
-            final doc = snapshot.data!.docs.first;
-            final lcdName = doc['lcd_name'] as String?;
-            final lcdBrand = doc['brand'] as String?;
-            final resolution = doc['resolution'] as String?;
-            final weight = doc['weight'] as String?;
-            final port = doc['port'] as String?;
-
-            return StLcdDetailCard(
-              lcdName: lcdName!,
-              brand: lcdBrand!,
-              resolution: resolution!,
-              weight: weight!,
-              port: port!,
-            );
           } catch (e) {
             log('Error: $e');
             return const Center(
