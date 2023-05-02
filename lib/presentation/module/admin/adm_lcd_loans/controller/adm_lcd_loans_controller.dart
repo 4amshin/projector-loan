@@ -77,13 +77,23 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
     await confirmationDialog(
       message: "LCD Dikembalikan?",
       onYes: () async {
+        //delete loan data
         await LoanService.deleteLoanData(
           lcdId: data.lcdId,
         );
-        log("${data.lcdId} Loan Data Delete");
 
+        //move it to loan history collection
+        log("${data.lcdId} Loan Data Delete");
         await LoanService.addLoanHistory(data: data);
         log("${data.lcdId} Added to Loan History");
+
+        //update the lcd status in inventory to be available
+        await LcdService.updateLCDStatus(
+          lcdId: data.lcdId,
+          status: "Tersedia",
+        );
+
+        //close dialog
         Get.back();
       },
     );

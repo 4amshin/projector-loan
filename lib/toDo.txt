@@ -6,8 +6,9 @@ App UI
 - on boarding screen
 - Made Get started screen
 
-Issue
-- Admin loan history (should we make a separate collection for loan history)
+- LCD inventory
+ - when lcd status is 'broken/rusak' and student scan the barcode then display dialog "LCD Ini Rusak"
+ - when lcd statis is 'OnUser/Sedang Digunakan' and student scan then display dialog "LCD Sedang Digunakan Oleh "studentName", "StudentNim"
 
 Icon Link
 ==================
