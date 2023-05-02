@@ -1,21 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class LoanData {
+class LoanHistory {
   final String lcdId;
   final String lcdName;
   final DateTime loanDate;
   final DateTime returnDate;
-  final bool onReturn;
   final String status;
   final String studentEmail;
   final String studentName;
   final String studentNim;
   final String studentProfile;
-  LoanData({
+  LoanHistory({
     required this.lcdId,
     required this.lcdName,
     required this.loanDate,
     required this.returnDate,
-    required this.onReturn,
     required this.status,
     required this.studentEmail,
     required this.studentName,
@@ -23,13 +21,12 @@ class LoanData {
     required this.studentProfile,
   });
 
-  factory LoanData.fromFirebase(Map<String, dynamic> map) {
-    return LoanData(
+  factory LoanHistory.fromFirebase(Map<String, dynamic> map) {
+    return LoanHistory(
       lcdId: map['lcd_id'] ?? '',
       lcdName: map['lcd_name'] ?? '',
       loanDate: map['loan_date'].toDate() ?? '',
       returnDate: map['loan_date'].toDate() ?? DateTime.now(),
-      onReturn: map['on_return'] ?? false,
       status: map['status'] ?? '',
       studentEmail: map['student_email'] ?? '',
       studentName: map['student_name'] ?? '',

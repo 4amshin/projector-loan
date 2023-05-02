@@ -27,6 +27,14 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
         .snapshots();
   }
 
+  // loan history stream
+  Stream loanHistoryStream() {
+    return FirebaseFirestore.instance
+        .collection('loan_history')
+        .orderBy('return_date', descending: true)
+        .snapshots();
+  }
+
   acceptRequest({
     required String lcdId,
     required String status,
@@ -64,29 +72,19 @@ class AdmLcdLoansController extends State<AdmLcdLoansView>
   }
 
   confirmReturned({
-    required String lcdId,
-    required String status,
+    required LoanData data,
   }) async {
     await confirmationDialog(
       message: "LCD Dikembalikan?",
       onYes: () async {
-        await LoanService.updateLoanStatus(
-          lcdId: lcdId,
-          status: status,
-          onReturn: false,
+        await LoanService.deleteLoanData(
+          lcdId: data.lcdId,
         );
-        await FirebaseFirestore.instance
-            .collection("loan_data")
-            .doc(lcdId)
-            .update({
-          "return_date": Timestamp.now(),
-        });
-        await LcdService.updateLCDStatus(
-          lcdId: lcdId,
-          status: "Tersedia",
-        );
+        log("${data.lcdId} Loan Data Delete");
+
+        await LoanService.addLoanHistory(data: data);
+        log("${data.lcdId} Added to Loan History");
         Get.back();
-        log("LCD Returned");
       },
     );
   }

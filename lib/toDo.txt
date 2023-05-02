@@ -1,12 +1,13 @@
-- make data class model
-- apply to the ['']
-- apply to them all
-
-- make function inside model for service (createUserData, createLcdData, etc)
-
+Admin Dashboard
 - Display the number of total request in Admin category menu, by iterate and count the loan_data
 - Display total Loan made in this week by counting the loan_data date(this week) the done order
 
+App UI
+- on boarding screen
+- Made Get started screen
+
+Issue
+- Admin loan history (should we make a separate collection for loan history)
 
 Icon Link
 ==================

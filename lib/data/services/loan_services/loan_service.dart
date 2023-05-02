@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:projector_loan/data/model/loan_data_model.dart';
 
 class LoanService {
   static addLoanData({
@@ -19,6 +20,22 @@ class LoanService {
       "student_name": studentName,
       "student_nim": studentNim,
       "student_profile": studentProfile,
+    });
+  }
+
+  static addLoanHistory({
+    required LoanData data,
+  }) async {
+    await FirebaseFirestore.instance.collection("loan_history").add({
+      "lcd_id": data.lcdId,
+      "lcd_name": data.lcdName,
+      "status": 'Returned',
+      "loan_date": data.loanDate,
+      "return_date": Timestamp.now(),
+      "student_email": data.studentEmail,
+      "student_name": data.studentName,
+      "student_nim": data.studentNim,
+      "student_profile": data.studentProfile,
     });
   }
 

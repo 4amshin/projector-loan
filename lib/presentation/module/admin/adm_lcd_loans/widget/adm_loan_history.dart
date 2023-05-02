@@ -3,15 +3,9 @@ import 'dart:developer';
 
 import 'package:projector_loan/core.dart';
 
-class AdmLoanStatus extends StatelessWidget {
-  final String status;
-  final bool displayRequestButton;
-  final bool acceptRequest;
-  const AdmLoanStatus({
+class AdmLoanHistory extends StatelessWidget {
+  const AdmLoanHistory({
     Key? key,
-    required this.status,
-    this.displayRequestButton = false,
-    this.acceptRequest = false,
   }) : super(key: key);
 
   @override
@@ -20,9 +14,7 @@ class AdmLoanStatus extends StatelessWidget {
     return SafeArea(
       minimum: const EdgeInsets.all(15),
       child: StreamBuilder(
-        stream: status == 'Returned'
-            ? controller.loanHistoryStream()
-            : controller.loanDataStream(status: status),
+        stream: controller.loanHistoryStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -46,28 +38,6 @@ class AdmLoanStatus extends StatelessWidget {
                   nim: item.studentNim,
                   imgUrl: item.studentProfile,
                   lcdName: item.lcdName,
-                  requestButton: displayRequestButton,
-                  returnedButton: item.onReturn,
-                  isRequest: status == 'Request' ? true : false,
-                  isReturned: status == 'Returned' ? true : false,
-                  onAccept: () {
-                    if (displayRequestButton && acceptRequest) {
-                      controller.acceptRequest(
-                        lcdId: item.lcdId,
-                        status: 'OnUse',
-                      );
-                    }
-                  },
-                  onReject: () {
-                    if (displayRequestButton) {
-                      controller.rejectRequest(lcdId: item.lcdId);
-                    }
-                  },
-                  onReturn: () {
-                    if (item.onReturn) {
-                      controller.confirmReturned(data: item);
-                    }
-                  },
                 );
               },
             );
