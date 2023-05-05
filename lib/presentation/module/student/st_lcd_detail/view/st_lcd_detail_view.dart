@@ -38,14 +38,26 @@ class StLcdDetailView extends StatefulWidget {
               final resolution = doc['resolution'] as String?;
               final weight = doc['weight'] as String?;
               final port = doc['port'] as String?;
+              final status = doc['status'] as String?;
+              controller.lcdStatus = status;
 
-              return StLcdDetailCard(
-                lcdName: lcdName!,
-                brand: lcdBrand!,
-                resolution: resolution!,
-                weight: weight!,
-                port: port!,
-              );
+              if (status == "Dipakai") {
+                return Center(
+                  child: Text("$lcdName sedang digunakan"),
+                );
+              } else if (status == "Rusak") {
+                return Center(
+                  child: Text("$lcdName Rusak"),
+                );
+              } else {
+                return StLcdDetailCard(
+                  lcdName: lcdName!,
+                  brand: lcdBrand!,
+                  resolution: resolution!,
+                  weight: weight!,
+                  port: port!,
+                );
+              }
             }
           } catch (e) {
             log('Error: $e');
@@ -60,9 +72,11 @@ class StLcdDetailView extends StatefulWidget {
           }
         },
       ),
-      floatingActionButton: StBorrowButton(
-        onTap: () => controller.doLoanLcd(),
-      ),
+      floatingActionButton: controller.lcdStatus == "Tersedia"
+          ? StBorrowButton(
+              onTap: () => controller.doLoanLcd(),
+            )
+          : null,
     );
   }
 

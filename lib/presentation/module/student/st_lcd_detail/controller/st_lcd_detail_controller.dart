@@ -24,6 +24,7 @@ class StLcdDetailController extends State<StLcdDetailView>
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   String? scannedData;
+  String? lcdStatus;
 
   //get the lcd_Data stream
   Future<QuerySnapshot> getLcdData() async {
